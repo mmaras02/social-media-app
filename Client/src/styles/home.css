@@ -1,0 +1,61 @@
+.home{
+    height: 100vh;  
+}
+.home-content{
+    height: 100%;
+    margin-left: 16vw;
+    width: calc(100% - 16vw);
+    display: flex;
+    flex-direction: column;
+}
+
+.image-container{
+    width: 25vw;
+    height: 63vh;
+}
+.image-container img{
+    width: 25vw;
+    height: 63vh;
+}
+.post-container{
+    display: flex;
+    flex-direction: column;
+    width: 25vw;
+    margin-left: 20vw;
+    border: 0.5px solid rgba(101, 101, 101, 0.259);
+}
+.user-info{
+    width: 100%;
+    display: flex;
+    height: 6vh;
+    align-items: center;
+
+}
+.user-info img{
+    margin-right:15px;
+    width: 2vw;
+    border-radius: 50%;
+}
+.description-container{
+    height: 19vh;
+}
+.icons-container{
+    display: flex;
+    margin-top: 10px;
+    font-size:x-large;
+}
+.icons-container svg{
+    margin: 5px 10px 5px 5px;
+    font-size: 30px;
+}
+.icons-container a{
+    margin-right: 0;
+}
+.description{
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+.description a{
+    margin-right:10px ;
+}

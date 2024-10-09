@@ -1,0 +1,72 @@
+.login-container, .registration-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #fefefef9;
+}
+.login-box, .registration-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid rgba(188, 188, 188, 0.666);
+    height: 70vh;
+    width: 22vw;
+}
+.registration-box button{
+    margin-top: 20px;
+}
+.login-box img, .registration-box img{
+    width: 12vw;
+    margin-top: 4vh;
+    margin-bottom: 5vh;
+}
+.login-info{
+    margin: 0.5vh;
+}
+
+.info-box{
+    margin-top: 10px;
+    width: 17vw;
+    height: 4.5vh;
+    border: 1px solid rgba(188, 188, 188, 0.666);
+    border-radius: 3px;
+    background-color: rgba(170, 170, 170, 0.126);
+}
+.action-button{
+    background-color: rgb(0, 171, 245);
+    margin-top: 20px;
+    width: 17.5vw;
+    height: 5vh;
+    border-radius: 10px;
+    color: antiquewhite;
+    font-size: medium;
+    border: none;
+}
+.action-button:hover{
+    background-color: rgb(0, 143, 204);
+}
+#signup-link:hover,#forgot-psswrd:hover{
+    color: rgb(0, 143, 204);
+}
+.signup-text{
+    border: 1px solid rgba(188, 188, 188, 0.666);
+    height: 8vh;
+    width: 22vw;
+    margin-top:2vh;
+}
+#signup-text{
+    color: rgba(23, 23, 23, 0.873);
+}
+.login-box p{
+    margin-top: 10vh;
+}
+.login-container #phone{
+    width: auto;
+    height: 77vh;
+    margin-right: 3vw;
+}
+#forgot-psswrd, #signup-link{
+    text-decoration: none;
+    color: rgb(0, 171, 245);
+}
