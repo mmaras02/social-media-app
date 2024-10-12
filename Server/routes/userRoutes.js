@@ -1,10 +1,12 @@
 const express= require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
-const requireAuth = require('../middleware/requireAuth');
+const verifyToken = require('../middleware/verifyToken');
 
 router.get('/users', userController.displayUsers);
-router.use(requireAuth);
+
+router.use(verifyToken);
+
 router.get('/profile', userController.displayProfile);
 router.patch('/:id', userController.editProfile);
 //router.post('/', userController.createUser);

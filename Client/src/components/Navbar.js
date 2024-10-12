@@ -12,6 +12,9 @@ const Navbar = ( ) => {
     const navigate=useNavigate();
     const [showPopUp,setShowPopUp] = useState(false);
 
+    const handleClosePopUp = () => {
+        setShowPopUp(false);
+    }
     const handleClick = () =>   {
         navigate("/profile");
     }
@@ -69,7 +72,7 @@ const Navbar = ( ) => {
                 <span><CgProfile /></span>
                 <a>Profile</a>
             </div>
-            {showPopUp && <Create />}
+            {showPopUp && <Create onClose = {handleClosePopUp} />}
 
         </div>
         );

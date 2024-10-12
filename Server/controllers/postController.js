@@ -1,11 +1,58 @@
 const { default: mongoose } = require('mongoose');
 const Post = require('../models/PostModel');
+/*const multer = require('multer');
+
+
+const storage = multer.diskStorage({
+    //destination where we want to store images
+    destination:(req, file, callback) => {
+        const uploadPath = path.join(__dirname, '../../client/public/uploads/');
+        callback(null, uploadPath);
+    },
+    filename: (req, file, callback) => {
+        callback(null, file.originalname);
+    }
+})
+const upload = multer({storage: storage}).single('image');*/
+
+//create post
+const createPost = async (req, res) => {
+    const {userId, description} = req.body;
+    console.log("body i received", userId,description);
+
+    try{
+        if (!req.file) {
+            throw new Error("No image uploaded");
+        }
+
+        console.log("Received body", userId, description);
+        console.log("File uploaded:", req.file);
+
+        const post = await Post.create({userId, description, image:req.file.filename});
+        res.status(200).json(post);
+
+    } catch(error){
+        res.status(400).json({error: error.message});
+    }
+}
+
+
 
 //display all posts
 const displayAllPosts = async (req, res) => {
     const post = await Post.find({}).sort({createdAt:-1});
 
     res.status(200).json(post);
+}
+
+const displayAllUserPosts = async (req, res) => {
+    try{
+        const userId = req.userId;
+        const posts = await Post.find({userId}).sort({createdAt:-1});
+        res.status(200).json(posts);
+    } catch(error){
+        res.status(400).json({error});
+    }
 }
 
 //display one post
@@ -56,24 +103,11 @@ const deletePost = async (req, res) => {
     res.status(200).json(post);
 }
 
-//create post
-const createPost = async (req, res) => {
-    const {userId, description, image, likes, comments} = req.body;
-
-    try{
-        const post = await Post.create({userId, description, image, likes, comments});
-        res.status(200).json(post);
-
-    } catch(error){
-        res.status(400).json({error: error.message});
-    }
-    res.json({mssg: 'create new post'});
-}
-
 module.exports = {
     displayAllPosts,
     displayPost,
     editPost,
     deletePost,
-    createPost
+    createPost,
+    displayAllUserPosts
 }

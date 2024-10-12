@@ -14,28 +14,34 @@ const Home = () => {
     //display all posts by date
     useEffect(() => {
         const fetchPosts = async () => {
-            const response = await fetch('/api/posts');
+            const response = await fetch('/api/posts',{
+                headers: {
+                    'Content-Type': 'application/json'
+            }});
             const json = await response.json();
-
+            console.log("Posts Response:", json); 
             if(response.ok){
-                console.log("token1", token);
                 setPosts(json);
-            }
+            } 
         }
+
         const fetchUsers = async () => {
-            const response = await fetch('/api/user/users');
+            const response = await fetch('/api/user/users',{
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+            }});
             const json = await response.json();
 
             if(response.ok){
                 setUsers(json);
             }
-
-            console.log("user", users);
         }
+        
         fetchUsers();
         fetchPosts();
         
-    },[])
+    },[token])
 
     const findUserById = (userId) => {
         const user = users.find(user => user._id===userId);
@@ -46,7 +52,7 @@ const Home = () => {
     <div className="home">
         <Navbar />
         <div className="home-content">
-            {posts && posts.map((post) => {
+            {posts &&  users && posts.map((post) => {
                 const user = findUserById(post.userId);
                 return (
                 <div className="post-container">
@@ -56,7 +62,7 @@ const Home = () => {
                         
                     </div>
                     <div className="image-container">
-                        <img key={post._id} src={post.image} />
+                        <img key={post._id} src={`/uploads/${post.image}`}/>
                     </div>
                     <div className="description-container">
                         <div className="icons-container">
