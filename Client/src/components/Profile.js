@@ -2,53 +2,12 @@ import { useState, useEffect } from "react";
 import "../styles/profile.css";
 import Navbar from "./Navbar";
 import { IoSettingsOutline } from "react-icons/io5";
+import useFetch from "../hooks/useFetch";
 
 const Profile = () => {
-    const [posts, setPosts] = useState(null);
-    const [user, setUser] = useState(null);
     const token = localStorage.getItem("token");
-
-    useEffect(() => {
-        const fetchUser = async () => {
-            if(!token){
-                throw Error("There is no token in local storage");
-            }
-            try{
-            const response = await fetch('/api/user/profile',{
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-            }})
-            const json = await response.json();
-            console.log('user that i need',json);
-
-            if(response.ok){
-                setUser(json);
-            }
-            else{
-                throw Error(json.error);
-            }
-            }catch(error){
-                throw Error(error);
-            }
-        }
-
-        const fetchPosts = async () => {
-            const response = await fetch('/api/posts',{
-                headers: {
-                    'Content-Type': 'application/json'
-            }});
-            const json = await response.json();
-            console.log("Posts Response:", json); 
-            if(response.ok){
-                setPosts(json);
-            }
-        }
-
-        fetchUser();
-        fetchPosts();
-        
-    },[token])
+    const {data:user} = useFetch('/api/user/profile', token);
+    const {data:posts} = useFetch('/api/posts', token);
 
     return ( 
         <div className="profile">

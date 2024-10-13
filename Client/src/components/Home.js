@@ -5,43 +5,12 @@ import Navbar from "./Navbar";
 import { FaRegHeart, FaRegComment } from "react-icons/fa6";
 import { IoPaperPlaneOutline } from "react-icons/io5";
 import { RiBookmarkLine } from "react-icons/ri";
+import useFetch from "../hooks/useFetch";
 
 const Home = () => {
-    const [posts, setPosts] = useState(null);
-    const [users, setUsers] = useState(null);
     const token = localStorage.getItem("token");
-
-    //display all posts by date
-    useEffect(() => {
-        const fetchPosts = async () => {
-            const response = await fetch('/api/posts',{
-                headers: {
-                    'Content-Type': 'application/json'
-            }});
-            const json = await response.json();
-            console.log("Posts Response:", json); 
-            if(response.ok){
-                setPosts(json);
-            } 
-        }
-
-        const fetchUsers = async () => {
-            const response = await fetch('/api/user/users',{
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-            }});
-            const json = await response.json();
-
-            if(response.ok){
-                setUsers(json);
-            }
-        }
-        
-        fetchUsers();
-        fetchPosts();
-        
-    },[token])
+    const {data:users} = useFetch('/api/user/users', token);
+    const {data:posts} = useFetch('/api/posts', token);
 
     const findUserById = (userId) => {
         const user = users.find(user => user._id===userId);

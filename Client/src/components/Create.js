@@ -1,14 +1,15 @@
 import { useState } from "react";
 import "../styles/create.css";
 import { IoMdClose } from "react-icons/io";
+import useFetch from "../hooks/useFetch";
 
 const Create = ( {onClose}) => {
+  const token = localStorage.getItem("token");
   const [file, setFile] = useState("");
-  const [user, setUser] = useState("");
+  const {data:user} = useFetch('/api/user/profile',token);
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const [showImagePreview, setShowImagePreview] = useState(false);
-  const token = localStorage.getItem("token");
 
   const handleImagePreview = (e) => {
     const file = e.target.files[0];
@@ -25,18 +26,10 @@ const Create = ( {onClose}) => {
 
   const handleUpload = async(e) => {
     e.preventDefault();
-
-    //getting the user _id
-    const response = await fetch('/api/user/profile',{
-      headers: {
-          'Authorization': `Bearer ${token}`
-      }});
-    const user = await response.json();
-
-    if(response.ok){
-      setUser(user);
+    if (!user) {
+      alert("User not loaded yet!");
+      return;
     }
-
     //imamo description, user i image
     const formData = new FormData();
     formData.append("userId", user._id);
