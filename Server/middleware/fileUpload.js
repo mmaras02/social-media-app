@@ -13,6 +13,6 @@ const storage = multer.diskStorage({
     
 })
 //console.log("in storage",storage);
-const upload = multer({storage: storage}).single('image');
+const upload = multer({storage: storage}).single('profilePicture');
 
 module.exports = upload;

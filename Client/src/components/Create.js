@@ -36,8 +36,6 @@ const Create = ( {onClose}) => {
     formData.append("description", description);
     formData.append("image", file);
 
-    console.log("form data", formData);
-
     try {
       const response = await fetch("/api/posts/newpost", {
         method: "POST",

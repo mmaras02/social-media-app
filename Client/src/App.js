@@ -7,6 +7,7 @@ import Create from './components/Create';
 import Search from './components/Search';
 import Explore from './components/Explore';
 import Registration from './components/Registration';
+import EditProfile from './components/EditProfile';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route exact path="/create" element = {<Create />}></Route>
             <Route exact path="/search" element = {<Search />}></Route>
             <Route exact path="/explore" element = {<Explore />}></Route>
+            <Route exact path="/edit" element = {<EditProfile />}></Route>
           </Routes>
         </div>
       </div>

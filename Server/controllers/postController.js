@@ -36,8 +36,6 @@ const createPost = async (req, res) => {
     }
 }
 
-
-
 //display all posts
 const displayAllPosts = async (req, res) => {
     const post = await Post.find({}).sort({createdAt:-1});

@@ -28,7 +28,7 @@
     width: 150px;
     display: flex;
     justify-content: center;
-    margin: 4vh 6vw;
+    margin: 2vh 6vw;
 }
 .photo-container img{
     width: 150px;
@@ -69,7 +69,7 @@
     border: none;
     height: 4vh;
     width: 7vw;
-    background-color: rgba(109, 108, 108, 0.463);
+    background-color: rgba(73, 73, 73, 0.463);
     border-radius: 10px;
     font-size: 15px;
     color: white;   
@@ -91,7 +91,7 @@
     display: flex;
     justify-content: space-evenly;
     top: 0;
-    height: 100%;
+    height: 25%;
 }
 .posts{
     top: 0;
@@ -100,6 +100,14 @@
     font-weight: 600;
     font-size: medium;
     padding-right: 63px;
+}
+.bio-content{
+    display: flex;
+}
+.bio-content p{
+    font-size: 15px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: 100;
 }
 
 .user-profile{

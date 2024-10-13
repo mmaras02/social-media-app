@@ -1,0 +1,82 @@
+.edit-profile-container{
+    height: 100vh;
+    width: 100%;
+}
+.profile-content{
+    display: flex;
+}
+.all-settings-container{
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    border-right: 0.5px solid rgba(101, 101, 101, 0.259);
+}
+.edit-container{
+    width: 75%;
+    height: 100%;
+}
+.edit-small-container{
+    height: 100%;
+    margin: 6vh 11vw 0 11vw;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+}
+
+.edit-small-container h2{
+    display: flex;
+    margin-top: 0;
+    font-weight: 700;
+    font-size: 20px;
+}
+.change-photo-section{
+    width: 100%;
+    height: 12vh;
+    margin-top: 5vh;
+    background-color: rgba(73, 73, 73, 0.463);
+    border-radius: 15px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.change-photo-section img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    margin: 10px 20px;
+    /*border: 1px solid whitesmoke;*/
+}
+.info-contents{
+    display: flex;
+    align-items: center;
+}
+
+.change-photo-section button{
+    width: 8vw;
+    margin-right: 20px;
+    color: aliceblue;
+    margin-top: 0;
+}
+
+.change-info-section{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-top: 20px;
+}
+.bio{
+    width: 100%;
+    height: 9vh;
+    background-color: transparent;
+    border: 0.5px solid rgba(101, 101, 101, 0.259);
+    border-radius: 15px;
+    color: aliceblue;
+    font-size: larger;
+}
+.input{
+    height: 7vh;
+}
