@@ -10,7 +10,7 @@ const EditProfile = () => {
     const location = useLocation();
     const { user } = location.state;
     const [username, setUsername] = useState("");
-    const [bio, setBio] = useState("");
+    const [bio, setBio] = useState(user.bio || "");
     const [file, setFile] = useState("");
     const token = localStorage.getItem("token");
 
@@ -29,7 +29,7 @@ const EditProfile = () => {
         const formData = new FormData();
         formData.append("username", username);
         formData.append("bio", bio);
-        formData.append("profilePicture", file);
+        formData.append("image", file);
 
         try{
             const response = await fetch(`/api/user/${user._id}`, {
@@ -80,7 +80,7 @@ const EditProfile = () => {
 
                         <div className="change-info-section">
                             <h3>Bio</h3>
-                            <textarea className="bio textarea" type="text" placeholder="Bio" onChange={(e) => setBio(e.target.value)} />
+                            <textarea className="bio textarea" type="text" value={bio} onChange={(e) => setBio(e.target.value)} />
                         </div>
                         <div className="change-info-section">
                             <h3>Gender</h3>

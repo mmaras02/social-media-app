@@ -10,34 +10,50 @@
 }
 
 .image-container{
-    width: 25vw;
-    height: 63vh;
+    height: 585px;
+    width: 468px;
+    border: 0.5px solid rgba(101, 101, 101, 0.259);
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
 }
 .image-container img{
-    width: 25vw;
-    height: 63vh;
+    /*max-height: 585px;
+    max-width: 468px;*/
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
 }
 .post-container{
     display: flex;
     flex-direction: column;
-    width: 25vw;
-    margin-left: 20vw;
-    border: 0.5px solid rgba(101, 101, 101, 0.259);
+    /*width: 25vw;*/
+    margin-left: 15vw;
+    margin-top: 3vh;
+    border-bottom: 0.5px solid rgba(101, 101, 101, 0.259);
+
+    max-width: 100%;
+    width: min(470px, 100vw);
 }
 .user-info{
     width: 100%;
     display: flex;
     height: 6vh;
     align-items: center;
-
+    padding-bottom: 10px;
 }
 .user-info img{
-    margin-right:15px;
-    width: 2vw;
+    margin-right:12px;
+    margin-left: 5px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
+
+    object-fit: contain;
+    border: 1px solid rgba(101, 101, 101, 0.259);
 }
 .description-container{
-    height: 19vh;
+    height: 162px;
 }
 .icons-container{
     display: flex;
@@ -46,7 +62,7 @@
 }
 .icons-container svg{
     margin: 5px 10px 5px 5px;
-    font-size: 30px;
+    font-size: 24;
 }
 .icons-container a{
     margin-right: 0;

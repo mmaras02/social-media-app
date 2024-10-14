@@ -5,6 +5,7 @@ import { IoSettingsOutline } from "react-icons/io5";
 import useFetch from "../hooks/useFetch";
 import EditProfile from "./EditProfile";
 import { useNavigate } from "react-router-dom";
+import { GoPlus } from "react-icons/go";
 
 const Profile = () => {
     const token = localStorage.getItem("token");
@@ -52,6 +53,13 @@ const Profile = () => {
                             </div>
 
                         </div>
+
+                        <div className="add-stories-container">
+                            <div className="add-story">
+                                <GoPlus style={{fontSize:'60px', color:'rgba(209, 189, 189, 0.5)'}}/>
+                            </div>
+                        </div>
+
                     </div>
                     )}
                     <div className="user-post-container">

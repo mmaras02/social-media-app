@@ -38,7 +38,7 @@ const Home = () => {
                             <FaRegHeart />
                             <FaRegComment />
                             <IoPaperPlaneOutline />
-                            <RiBookmarkLine style={{marginLeft: '17vw', marginRight:'0px', fontSize:'35px'} }/>
+                            <RiBookmarkLine style={{marginLeft: '20vw', marginRight:'0px', fontSize:'24px'} }/>
                         </div>
                         <div className="description">
                             <a><strong>{user.username}</strong></a>

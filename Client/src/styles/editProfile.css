@@ -48,6 +48,8 @@
     border-radius: 50%;
     display: flex;
     margin: 10px 20px;
+    object-fit: contain;
+    background-color: black;
     /*border: 1px solid whitesmoke;*/
 }
 .info-contents{
