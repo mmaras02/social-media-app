@@ -8,6 +8,7 @@ import Search from './components/Search';
 import Explore from './components/Explore';
 import Registration from './components/Registration';
 import EditProfile from './components/EditProfile';
+import Post from './components/Post';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route exact path="/search" element = {<Search />}></Route>
             <Route exact path="/explore" element = {<Explore />}></Route>
             <Route exact path="/edit" element = {<EditProfile />}></Route>
+            <Route path="/profile/post/:id" element={<Post />} />
           </Routes>
         </div>
       </div>

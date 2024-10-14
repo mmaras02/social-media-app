@@ -18,6 +18,10 @@ const Profile = () => {
         navigate('/edit', { state: {user}});
     }
 
+    const handlePost = (post, user) => {
+        navigate(`/profile/post/${post._id}`, {state: {post: post, user: user}});
+    }
+
     return ( 
         <div className="profile">
             <Navbar />
@@ -64,7 +68,7 @@ const Profile = () => {
                     )}
                     <div className="user-post-container">
                     {posts && user && posts.filter(post => post.userId === user._id).map((post) => (
-                            <div className="user-image-container" key={post._id}>
+                            <div className="user-image-container" key={post._id} onClick={() => handlePost(post, user)}>
                                 <img src={`/uploads/${post.image}`} />
                             </div>
                     ))}
