@@ -125,13 +125,13 @@
     object-position: center;
 }
 
-.upload-description-container{
+.upload-description-container1{
     margin-top: 10px;
     margin-left: 10px;
     width: 35%;/*popravi*/
 }
 
-.upload-description-container textarea{
+.upload-description-container1 textarea{
     width: 100%;
     height: 20vh;
     background-color: transparent;

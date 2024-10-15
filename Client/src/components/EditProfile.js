@@ -67,7 +67,7 @@ const EditProfile = () => {
                         <div className="change-photo-section">
                             <div className="info-contents">
                                 <input id="fileInput" type="file" accept="image/*" onChange={onChangeFile} name="image" style={{ display: "none" }}/>
-                                <img src={user.profilePicture ? user.profilePicture : '/images/profile.png'} alt="profile" />
+                                <img id="edit-photo" src={user.profilePicture ? user.profilePicture : '/images/profile.png'} alt="profile" />
                                 <p>{user.username}</p>
                             </div>
                             <button className="upload-button" onClick={handleChangePhotoClick}>Change photo</button>

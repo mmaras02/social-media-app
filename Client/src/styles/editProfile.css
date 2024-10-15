@@ -41,6 +41,10 @@
     align-items: center;
 
 }
+#edit-photo{
+    width: 60px;
+    height: 60px;
+}
 
 .info-contents img{
     width: 60px;

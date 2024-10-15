@@ -82,7 +82,7 @@ const Create = ( {onClose}) => {
                   <div className="upload-image-container">
                     <img src={image} alt="post-photo" />
                   </div>
-                  <div className="upload-description-container">
+                  <div className="upload-description-container1">
                     <div className="info-contents">
                       <img src={user.profilePicture ? user.profilePicture : '/images/profile.png'} alt="profile" />
                       <p>{user.username}</p>
