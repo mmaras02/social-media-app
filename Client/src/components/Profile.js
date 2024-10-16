@@ -13,6 +13,8 @@ const Profile = () => {
     const {data:posts} = useFetch('/api/posts', token);
     const navigate = useNavigate();
 
+    const [showPopUp,setShowPopUp] = useState(false);
+
     const handleEditProfile = () => {
         //<EditProfile user={user}/>
         navigate('/edit', { state: {user}});
@@ -55,7 +57,6 @@ const Profile = () => {
                                     <p>{user.bio}</p>
                                 </div>
                             </div>
-
                         </div>
 
                         <div className="add-stories-container">

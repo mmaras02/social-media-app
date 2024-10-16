@@ -10,6 +10,12 @@ const displayUsers = async (req, res) => {
     res.status(200).json(user);
 }
 
+const getAllUsers = async (req, res) => {
+    const user = await User.find({});
+
+    res.status(200).json(user);
+}
+
 const displayProfile = async (req, res) => {
     try {
         const user = await User.findById(req.user._id);
@@ -56,6 +62,7 @@ const createUser = async (req, res) => {
 }
 
 module.exports = {
+    getAllUsers,
     displayUsers,
     displayProfile,
     editProfile,

@@ -28,7 +28,7 @@
     margin-top: 5px;
     display: flex;
     align-items: center;
-    margin-left: 15px;
+    margin-left: 5px;
     font-size: medium;
     border-radius: 15px;
 }
@@ -44,9 +44,14 @@
     background-color: rgba(44, 44, 44, 0.447);
 }
 .short{
-    width: 6vw;
-    top: 12vh;
+    width: 5vw;
+    top: 0;
 }
 .small{
     width: 4vw;
+}
+
+#icon{
+    margin-top: 5vh;
+    margin-bottom: 15px;
 }

@@ -1,5 +1,5 @@
 import "../styles/navbar.css";
-import { FaSearch,FaRegPaperPlane, FaRegHeart } from "react-icons/fa";
+import { FaSearch,FaRegPaperPlane, FaRegHeart, FaInstagram} from "react-icons/fa";
 import { FaHouse } from "react-icons/fa6";
 import { MdExplore } from "react-icons/md";
 import { LuPlusSquare } from "react-icons/lu";
@@ -27,6 +27,9 @@ const Navbar = ( ) => {
 
     return ( 
         <div className="navbar short">
+            <div id="icon" className="navbar-components small" onClick={handleClick1}>
+                <span><FaInstagram /></span>
+            </div>
             <div className="navbar-components small" onClick={handleClick1}>
                 <span><FaHouse /></span>
             </div>

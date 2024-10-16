@@ -39,7 +39,7 @@ const Post = () => {
           }
     }
     return ( 
-        <div className="modal-overlay">
+        <div className="modal-overlay" onClick={handleClose}>
             <div className="post-content">
                 <div className="full-image-container">
                     <img className="post-image" src={`/uploads/${post.image}`} />
@@ -64,7 +64,7 @@ const Post = () => {
                         <RiBookmarkLine style={{marginLeft: '15vw', marginRight:'0px', fontSize:'24px'} }/>
                     </div>
                     <div className="liked">{post?.likes > 0 ? `${post.likes} likes` : ''}</div>
-                    <input className="write-comment" placeholder="Add a comment"></input>
+                    <input className="write-comment" placeholder="Add a comment" ></input>
                     
                 </div>
             </div>

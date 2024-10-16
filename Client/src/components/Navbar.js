@@ -6,11 +6,13 @@ import { LuPlusSquare } from "react-icons/lu";
 import { CgProfile } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 import Create from "./Create";
+import Search from "./Search";
 import { useState } from "react";
 
 const Navbar = ( ) => {
     const navigate=useNavigate();
     const [showPopUp,setShowPopUp] = useState(false);
+    const [searchPopUp, setSearchPopUp] = useState(false);
 
     const handleClosePopUp = () => {
         setShowPopUp(false);
@@ -28,7 +30,8 @@ const Navbar = ( ) => {
         setShowPopUp(true);//pop up is open
     }
     const handleSearch = () => {
-        navigate("/search");
+        setSearchPopUp(true);
+        //navigate("/search");
     }
 
     const handleExplore = () => {
@@ -73,7 +76,7 @@ const Navbar = ( ) => {
                 <a>Profile</a>
             </div>
             {showPopUp && <Create onClose = {handleClosePopUp} />}
-
+            {searchPopUp && <Search />}
         </div>
         );
 }

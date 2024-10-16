@@ -28,7 +28,7 @@ const Home = () => {
                     <div className="user-info">
                         <img src={user.profilePicture} />
                         <p>{user.username}</p>
-                        
+                        {/*<p>{post.createdAt}</p>*/}
                     </div>
                     <div className="image-container">
                         <img key={post._id} src={`/uploads/${post.image}`}/>

@@ -9,6 +9,7 @@ router.get('/users', userController.displayUsers);
 router.use(verifyToken);
 
 router.get('/profile', userController.displayProfile);
+router.get('/all', userController.getAllUsers);
 router.patch('/:id', fileUpload, userController.editProfile);
 
 
