@@ -34,8 +34,3 @@ app.get('/', (req, res) => {
 app.use('/', userAuthRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/user', userRoutes);
-
-//listen for requests
-/*app.listen(process.env.PORT, () => {
-    console.log('listening to port', process.env.PORT);
-});*/
