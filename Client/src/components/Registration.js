@@ -1,15 +1,16 @@
 import { useState } from "react";
 import "../styles/login.css";
+import { useNavigate } from "react-router-dom";
 
 const Registration = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [username, setUsername] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Form submitted", { email, password, name, username });
 
         try{
             const result = await fetch('/register', {
@@ -17,7 +18,8 @@ const Registration = () => {
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({email,password,name,username})});
             if(result.ok){
-                console.log('success');
+                alert("Account succesfully made!");
+                navigate(-1);
                 //vrati se na login stranicu--> to u serveru napravi
             }else{
                 console.log('failed');

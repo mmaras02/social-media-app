@@ -31,6 +31,8 @@
     margin-left: 5px;
     font-size: medium;
     border-radius: 15px;
+
+    transition: height 0.3s ease;
 }
 .navbar-components a{
     margin-left: 15px;
@@ -46,6 +48,7 @@
 .short{
     width: 5vw;
     top: 0;
+    transition: width 0.3s ease;
 }
 .small{
     width: 4vw;

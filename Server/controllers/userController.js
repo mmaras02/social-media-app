@@ -38,7 +38,9 @@ const editProfile = async (req, res) => {
         {
             ...(req.body.username && { username: req.body.username }),
             ...(req.body.bio && { bio: req.body.bio }),
-            ...(req.file && { profilePicture: `/uploads/${req.file.filename}` })
+            ...(req.file && { profilePicture: `/uploads/${req.file.filename}` }),
+            ...(req.body.followers && { followers: req.body.followers }),
+            ...(req.body.following && { following: req.body.following }),
         }
     );
 

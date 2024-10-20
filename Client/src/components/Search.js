@@ -2,14 +2,24 @@ import NavbarShort from "./NavbarShort";
 import "../styles/search.css";
 import useFetch from "../hooks/useFetch";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Search = () => {
     const token = localStorage.getItem("token");
     const {data:users} = useFetch('/api/user/all', token);
+    const {data:loggedUser} = useFetch('/api/user/profile', token);
     const [searchUser, setSearchUser] = useState("");
+    const navigate = useNavigate();
 
     const foundUsers = searchUser && users?.filter((user) => user.username.toLowerCase().includes(searchUser.toLowerCase()));
 
+    const handleSearch = (user) => {
+        if(loggedUser && loggedUser.username === user.username){
+            navigate('/profile');
+        } else {
+            navigate(`/profiles/${user.username}`);
+        }
+    }
 
     return ( 
         <div className="search-container">
@@ -27,7 +37,7 @@ const Search = () => {
                         <h4>Recent</h4>
                         {foundUsers && foundUsers.length > 0 ? (
                             foundUsers.map((user) => 
-                                <div key={user._id} className="info-contents">
+                                <div key={user._id} id="info-user" className="info-contents" onClick={() => handleSearch(user)}>
                                     <img src={user.profilePicture ? user.profilePicture : '/images/profile.png'} alt="profile" />
                                     <p>{user.username}</p>
                         </div>)

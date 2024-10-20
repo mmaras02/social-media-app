@@ -1,5 +1,5 @@
 .profile {
-    height: 100%;
+    height: auto;
     max-width: 100%;
 }
 .profile-content{
@@ -104,6 +104,7 @@
 }
 .bio-content{
     display: flex;
+    white-space: pre-line;
 }
 .bio-content p{
     font-size: 15px;
@@ -155,4 +156,9 @@
     align-items: center;
 
     background-color: rgb(27, 27, 27,0.5);
+}
+
+.action.following {
+   background-color: rgb(0, 171, 245);
+    color: white;
 }

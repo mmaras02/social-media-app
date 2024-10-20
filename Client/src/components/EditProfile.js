@@ -26,6 +26,12 @@ const EditProfile = () => {
     const handleSubmit = async(e) => {
         e.preventDefault();
 
+        const updateUser = {
+            username:username,
+            bio:bio,
+            image:file
+
+        }
         const formData = new FormData();
         formData.append("username", username);
         formData.append("bio", bio);
