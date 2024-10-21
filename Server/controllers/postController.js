@@ -1,19 +1,5 @@
 const { default: mongoose } = require('mongoose');
 const Post = require('../models/PostModel');
-/*const multer = require('multer');
-
-
-const storage = multer.diskStorage({
-    //destination where we want to store images
-    destination:(req, file, callback) => {
-        const uploadPath = path.join(__dirname, '../../client/public/uploads/');
-        callback(null, uploadPath);
-    },
-    filename: (req, file, callback) => {
-        callback(null, file.originalname);
-    }
-})
-const upload = multer({storage: storage}).single('image');*/
 
 //create post
 const createPost = async (req, res) => {
@@ -85,6 +71,31 @@ const editPost = async (req, res) => {
 
 }
 
+const commentpost = async(req, res) => {
+    const {id} = req.params;
+    const { text, userId } = req.body;
+
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json({error: 'No such post'});
+    }
+    try {
+        const post = await Post.findOneAndUpdate(
+            { _id: id },
+            { $push: { comments: { text, userId, date: new Date() } } }, 
+            { new: true }
+        );
+
+        if (!post) {
+            return res.status(404).json({ error: 'No such post' });
+        }
+        return res.status(200).json(post);
+
+    } catch (error) {
+        console.error('Error adding comment:', error);
+        return res.status(500).json({ error: 'Something went wrong' });
+    }
+}
+
 //delete post
 const deletePost = async (req, res) => {
     const {id} = req.params;
@@ -105,6 +116,7 @@ module.exports = {
     displayAllPosts,
     displayPost,
     editPost,
+    commentpost,
     deletePost,
     createPost,
     displayAllUserPosts

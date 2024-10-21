@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const useFetch = (url, token) => {
+const useFetch = (url, method, token, body, isFormData) => {
     let [data, setData] = useState(null);
     let [error, setError] = useState(null);
     let [isPending, setIsPending] = useState(true);
@@ -11,9 +11,11 @@ const useFetch = (url, token) => {
             setError("Missing token");
         }
         fetch(url,{
+            method:method,
+            body:isFormData ? body : JSON.stringify(body),
             headers: {
                 'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
+                ...(isFormData ? {} : {'Content-Type': 'application/json'})
         }})
         .then((res) => {
             if(!res.ok){
@@ -31,7 +33,7 @@ const useFetch = (url, token) => {
             setIsPending(false);
         });
         
-    },[url, token])
+    },[url, method, token, body, isFormData]);
 
     return {data,error,isPending};
 }

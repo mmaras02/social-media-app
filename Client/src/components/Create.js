@@ -2,11 +2,12 @@ import { useState } from "react";
 import "../styles/create.css";
 import { IoMdClose } from "react-icons/io";
 import useFetch from "../hooks/useFetch";
+import { fetchData } from "../utils/fetchData";
 
 const Create = ( {onClose}) => {
   const token = localStorage.getItem("token");
   const [file, setFile] = useState("");
-  const {data:user} = useFetch('/api/user/profile',token);
+  const {data:user} = useFetch('/api/user/profile','GET', token);
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const [showImagePreview, setShowImagePreview] = useState(false);
@@ -14,9 +15,6 @@ const Create = ( {onClose}) => {
   const handleImagePreview = (e) => {
     const file = e.target.files[0];
     setFile(file);
-
-    console.log("file", file);
-    console.log("filename", file.name);
 
     if (file) {
       setImage(URL.createObjectURL(file)); 
@@ -30,34 +28,19 @@ const Create = ( {onClose}) => {
       alert("User not loaded yet!");
       return;
     }
-    //imamo description, user i image
+
     const formData = new FormData();
     formData.append("userId", user._id);
     formData.append("description", description);
     formData.append("image", file);
 
-    try {
-      const response = await fetch("/api/posts/newpost", {
-        method: "POST",
-        body: formData,
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        }
-      });
-      const json = await response.json();
-      console.log(json);
-
-      if (response.ok) {
-        alert("Post created!");
-        setImage(null);
-        setDescription("");
-        setShowImagePreview(false);
-      } else {
-        throw Error("something went wrong");
+    const {data, error} = await fetchData(`/api/posts/newpost`, 'POST', token, formData, true);
+      if(error){
+          alert("Error updating create status", error);
       }
-    } catch (error) {
-      console.log("Error submitting the form", error);
-    }
+      else{
+        alert("new post created");
+      }
   }
 
     return (

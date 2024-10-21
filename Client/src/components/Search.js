@@ -3,11 +3,12 @@ import "../styles/search.css";
 import useFetch from "../hooks/useFetch";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import UserInfo from "./UserInfo";
 
 const Search = () => {
     const token = localStorage.getItem("token");
-    const {data:users} = useFetch('/api/user/all', token);
-    const {data:loggedUser} = useFetch('/api/user/profile', token);
+    const {data:users} = useFetch('/api/user/all','GET', token);
+    const {data:loggedUser} = useFetch('/api/user/profile','GET', token);
     const [searchUser, setSearchUser] = useState("");
     const navigate = useNavigate();
 
@@ -38,8 +39,7 @@ const Search = () => {
                         {foundUsers && foundUsers.length > 0 ? (
                             foundUsers.map((user) => 
                                 <div key={user._id} id="info-user" className="info-contents" onClick={() => handleSearch(user)}>
-                                    <img src={user.profilePicture ? user.profilePicture : '/images/profile.png'} alt="profile" />
-                                    <p>{user.username}</p>
+                                    <UserInfo user={user} />
                         </div>)
                         ):(
                             <p>No users found!</p>

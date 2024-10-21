@@ -13,6 +13,7 @@ router.use(verifyToken);
 router.get('/:id', postController.displayPost);
 router.get('/myposts', postController.displayAllUserPosts);
 router.patch('/:id', postController.editPost);
+router.patch('/comment/:id', postController.commentpost);
 router.delete('/:id', postController.deletePost);
 router.use(fileUpload);
 router.post('/newpost', postController.createPost);

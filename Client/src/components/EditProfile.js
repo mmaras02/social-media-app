@@ -5,6 +5,7 @@ import "../styles/navbar.css";
 import "../styles/create.css";
 import { useLocation } from 'react-router-dom';
 import { useState } from "react";
+import { fetchData } from "../utils/fetchData";
 
 const EditProfile = () => {
     const location = useLocation();
@@ -26,39 +27,20 @@ const EditProfile = () => {
     const handleSubmit = async(e) => {
         e.preventDefault();
 
-        const updateUser = {
-            username:username,
-            bio:bio,
-            image:file
-
-        }
         const formData = new FormData();
         formData.append("username", username);
         formData.append("bio", bio);
         formData.append("image", file);
 
-        try{
-            const response = await fetch(`/api/user/${user._id}`, {
-                method: 'PATCH',
-                body: formData,
-                headers: {
-                        'Authorization': `Bearer ${token}`,
-                    }
-            });
-            const data = await response.json();
-
-            if (response.ok) {
-                alert("Profile edited");
+        const {data, error} = await fetchData(`/api/user/${user._id}`, 'PATCH', token, formData, true);
+            if(error){
+                alert("Error updating follows status", error);
+            }else{
                 setFile(null);
                 setUsername("");
                 setBio("");
-              } else {
-                throw Error("something went wrong");
-              }
-
-        } catch(error){
-            console.log("Error submitting the form", error);
-        }
+                alert("Profile edited");
+            }
     }
     return ( 
         <div className="edit-profile-container">

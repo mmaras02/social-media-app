@@ -1,68 +1,80 @@
 import { useNavigate, useParams, useLocation } from "react-router-dom";
-import { FaRegHeart, FaRegComment } from "react-icons/fa6";
-import { IoPaperPlaneOutline } from "react-icons/io5";
-import { RiBookmarkLine } from "react-icons/ri";
-import { HiDotsHorizontal } from "react-icons/hi";
 import "../styles/post.css";
+import "../styles/home.css";
+import { fetchData } from "../utils/fetchData";
+import PostActions from "./PostActions";
+import UserInfo from "./UserInfo";
+import { useState } from "react";
+import { IoMdClose } from "react-icons/io";
+import useFetch from "../hooks/useFetch";
 
 const Post = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { id } = useParams();
     const token = localStorage.getItem("token");
+    const [likedPosts, setLikedPosts] = useState({});
+    const {data:users} = useFetch('/api/user/users','GET', token);
 
     const post = location.state?.post;
     const user = location.state?.user;
 
-    const handleClose = () => {
+    const onClose = () => {
         navigate(-1);
     }
 
     const handleDelete = async(postId) => {
-        try {
-            const response = await fetch(`/api/posts/${postId}`, {
-              method: "DELETE",
-              headers: {
-                'Authorization': `Bearer ${token}`,
-              }
-            });
-            const json = await response.json();
-            console.log(json);
-      
-            if (response.ok) {
-              alert("Post deleted!");
-            } else {
-              throw Error("something went wrong");
-            }
-          } catch (error) {
-            console.log("Error submitting the form", error);
-          }
+      const {data, error} = await fetchData(`/api/posts/${postId}`, 'DELETE', token);
+        if(error){
+            alert("Error updating follows status", error);
+        }
+        else{
+          alert("post deleted");
+        }
     }
+    const findUserById = (userId) => {
+        const user = users.find(user => user._id===userId);
+        return user;
+    }
+
     return ( 
-        <div className="modal-overlay" onClick={handleClose}>
+        <div className="modal-overlay">
             <div className="post-content">
                 <div className="full-image-container">
                     <img className="post-image" src={`/uploads/${post.image}`} />
                 </div>
                 <div className="upload-description-container">
                     <div className="info-contents">
-                      <img src={user.profilePicture ? user.profilePicture : '/images/profile.png'} alt="profile" />
-                      <p>{user.username}</p>
-                      <HiDotsHorizontal style={{marginLeft:'200px', fontSize:'25px'}} onClick={() => handleDelete(post._id)}/>
+                    <UserInfo 
+                          user={user} 
+                          showDots={true} 
+                          onDotsClick={() => handleDelete(post._id)}
+                      />
                     </div>
+    
                     <div className="comment-section-container">
                         <div className="info-contents">
-                        <img src={user.profilePicture ? user.profilePicture : '/images/profile.png'} alt="profile" />
-                        <p>{user.username}</p>
-                        <a>{post.description}</a>
+                        <UserInfo 
+                              user={user} 
+                              description={post.description}
+                          />
+                          <IoMdClose onClick={onClose} style={{fontSize: '25px'}}/>
                         </div>
+                       {users && post.comments.map((comment, index) => {
+                        const commentUser = findUserById(comment.userId);
+                        return (
+                            <div className="display-comments-container">
+                                <UserInfo user={commentUser} description={comment.text}/>
+                            </div>
+                       )}
+
+                       )}
                     </div>
-                    <div className="icons-container">
-                        <FaRegHeart />
-                        <FaRegComment />
-                        <IoPaperPlaneOutline />
-                        <RiBookmarkLine style={{marginLeft: '15vw', marginRight:'0px', fontSize:'24px'} }/>
-                    </div>
+                    <PostActions post={post} 
+                                loggedUser={user} 
+                                token={token} 
+                                likedPosts={likedPosts} 
+                                setLikedPosts={setLikedPosts}
+                                />
                     <div className="liked">{post?.likes > 0 ? `${post.likes} likes` : ''}</div>
                     <input className="write-comment" placeholder="Add a comment" ></input>
                     

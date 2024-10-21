@@ -41,6 +41,10 @@
     height: 6vh;
     align-items: center;
     padding-bottom: 10px;
+    padding-top: 5px;
+}
+.user-info p{
+    margin-right: 10px
 }
 .user-info img{
     margin-right:12px;
@@ -53,10 +57,11 @@
     border: 0.5px solid rgb(104, 104, 104);
 }
 .description-container{
-    height: 162px;
+    height: 182px;
 }
 .icons-container{
     display: flex;
+    justify-content: space-between;
     margin-top: 10px;
     font-size:x-large;
 }
@@ -82,4 +87,21 @@
 .likes{
     display: flex;
     margin-left: 15px;
+}
+.comment-input{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+}
+
+.write-comment.home-page{
+    margin: 0;
+    border-top: 0;
+    width: 70%;
+}
+.action-button.post-button{
+    margin-top: 0;
+    width: 50px;
+    height: 25px;
 }

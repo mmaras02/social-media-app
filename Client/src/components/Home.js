@@ -2,75 +2,47 @@ import { useEffect, useState } from "react";
 import "../styles/navbar.css";
 import "../styles/home.css";
 import Navbar from "./Navbar";
-import { FaRegHeart, FaRegComment, FaHeart } from "react-icons/fa6";
-import { IoPaperPlaneOutline } from "react-icons/io5";
-import { RiBookmarkLine } from "react-icons/ri";
 import useFetch from "../hooks/useFetch";
+import PostActions from "./PostActions";
+import UserInfo from "./UserInfo";
+import { fetchData } from "../utils/fetchData";
 
 const Home = () => {
     const token = localStorage.getItem("token");
-    const {data:loggedUser} = useFetch('/api/user/profile', token);
-    const {data:users} = useFetch('/api/user/users', token);
-    const {data:posts} = useFetch('/api/posts', token);
-    const [isLiked, setIsLiked] = useState(false);
+    const {data:loggedUser} = useFetch('/api/user/profile','GET', token);
+    const {data:users} = useFetch('/api/user/users','GET', token);
+    const {data:posts} = useFetch('/api/posts','GET', token);
     const [likedPosts, setLikedPosts] = useState({});
+    const [comment, setComment] = useState("");
+    const [showPostButton, setShowPostButton] = useState(false);
 
     const findUserById = (userId) => {
         const user = users.find(user => user._id===userId);
         return user;
     }
 
-    const handleLike = async(post) => {
-
-        const isLiked = post.likes.includes(loggedUser._id);
-        console.log("is liked", isLiked);
-
-        const updatePost = {
-            likes: isLiked 
-            ? post.likes.filter(userId => userId !== loggedUser._id) 
-            : [...post.likes, loggedUser._id]
+    const handleComment = (e) => {
+        setComment(e.target.value);
+        setShowPostButton(e.target.value.length > 0); 
+    }
+    const submitComment = async(post) => {
+        const newComment = {
+            text: comment,
+            userId: loggedUser._id,
         };
-
-        setLikedPosts(prev => ({ ...prev, [post._id]: !isLiked }));
-
-
-        //const updatePost = { likes: updatedLikes };
-
-        /*const isLiked = posts.likes?.include(loggedUser._id);
-        console.log("isLiked", isLiked);*/
-        //const isLikedNow = !isLiked;
-        //setIsLiked(!isLikedNow);
-
-        /*const updatePost = {
-            likes: isLiked ? posts.likes.filter(userId => userId !== loggedUser._id) :[...post.likes, loggedUser._id]
-        };*/
-    
-            try {
-                const response = await fetch(`/api/posts/${post._id}`, {
-                    method: 'PATCH',
-                    body: JSON.stringify(updatePost),
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json',
-                    }
-                });
-                console.log("response", response);
-        
-                if (!response.ok) {
-                    throw new Error("Failed to update selected user's followers");
-                }
-        
-                /*const data1 = await response1.json();
-                setIsLiked(isLikedNow);
-                alert("liked/unliked post");*/
-                const data = await response.json();
-                // Update like status
-                alert("Post liked/unliked successfully");
-            } catch (error) {
-                setLikedPosts(prev => ({ ...prev, [post._id]: !isLiked })); 
-                throw Error(error);
-            }
+ 
+        const {data, error} = await fetchData(`/api/posts/comment/${post._id}`, 'PATCH', token, newComment);
+        if (error) {
+            console.error("Error saving comment:", error);
+            alert("Error saving comment");
+        } else {
+            console.log("Comment successfully saved:", data);
+            alert("Comment added!");
         }
+
+        setComment("");
+        setShowPostButton(false);
+    }
 
     return ( 
     <div className="home">
@@ -78,44 +50,26 @@ const Home = () => {
         <div className="home-content">
             {posts &&  users && posts.map((post) => {
                 const user = findUserById(post.userId);
-                const isLiked = likedPosts[post._id] !== undefined 
-                        ? likedPosts[post._id] 
-                        : post.likes.includes(loggedUser._id);
-                {/*const isLiked = post.likes?.includes(loggedUser._id);*/}
+                
                 return (
                 <div className="post-container">
-                    <div className="user-info">
-                        <img src={user.profilePicture} />
-                        <p>{user.username}</p>
-                        {/*<p>{post.createdAt}</p>*/}
-                    </div>
+                    <UserInfo user={user} />
                     <div className="image-container">
                         <img key={post._id} src={`/uploads/${post.image}`}/>
                     </div>
-                    <div className="description-container">
-                        <div className="icons-container">
-                        {isLiked ? (
-                            <FaHeart
-                            className={`icon liked`}
-                            id="heart-icon"
-                            onClick={() => handleLike(post)}
-                            />
-                        ) : (
-                            <FaRegHeart
-                            className={`icon`}
-                            id="heart-icon"
-                            onClick={() => handleLike(post)}
-                            />
-                        )}
-                            <FaRegComment />
-                            <IoPaperPlaneOutline />
-                            <RiBookmarkLine style={{marginLeft: '20vw', marginRight:'0px', fontSize:'24px'} }/>
-                        </div>
-                        <div className="likes">{post.likes.length} liked</div>
+                    <div className="description-container" >
+                        <PostActions post={post} loggedUser={loggedUser} token={token} likedPosts={likedPosts} setLikedPosts={setLikedPosts}/>
                         <div className="description">
                             <a><strong>{user.username}</strong></a>
                             <p>{post.description}</p>
                         </div>
+                        <div className="comment-input">
+                            <input className="write-comment home-page" placeholder="Write a comment" type="text" value={comment} onChange={handleComment} />
+                            {showPostButton && (
+                                <button className="action-button post-button" onClick={() => submitComment(post)}>post</button>
+                            )}
+                        </div>
+                        
                     </div>
                 </div>
                 

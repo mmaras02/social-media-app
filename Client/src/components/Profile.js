@@ -2,11 +2,7 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { GoPlus } from "react-icons/go";
 
 const Profile = ({user, isLoggedUser, posts, isFollowing, handleFollow, handleEditProfile, handlePost}) => {
-    console.log(user);
 
-    if(!user){
-        console.log("fuck this");
-    }
     return ( 
         <div className="user-profile">
             <div className="profile-header">
