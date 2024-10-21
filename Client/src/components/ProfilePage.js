@@ -40,10 +40,10 @@ const ProfilePage = () => {
         //selectedUser.followers+1
     const handleFollow = async(e) => {
         e.preventDefault();
+        
         const isFollowingNow = isFollowing;
-    
-    // Update the UI immediately
         setIsFollowing(!isFollowingNow);
+
 
         if(!isFollowing){
             const updateSearchedUser = {

@@ -76,3 +76,10 @@
 .description a{
     margin-right:10px ;
 }
+.icon.isLiked{
+    background-color: white;
+}
+.likes{
+    display: flex;
+    margin-left: 15px;
+}

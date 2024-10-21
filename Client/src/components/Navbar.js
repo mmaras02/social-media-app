@@ -154,7 +154,7 @@ const Navbar = () => {
                 {!isShortNavbar && <a>Profile</a>}
             </div>
 
-            {showPopUp && <Create />}
+            {showPopUp && <Create onClose={() => setShowPopUp(false)} />}
             {searchPopUp && <Search onClose={() => setSearchPopUp(false)}/>}
         </div>
     );

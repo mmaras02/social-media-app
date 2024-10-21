@@ -18,7 +18,6 @@ router.use(fileUpload);
 router.post('/newpost', postController.createPost);
 
 
-
 module.exports = router;
 
 
