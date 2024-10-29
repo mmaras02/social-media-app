@@ -50,17 +50,18 @@ const Profile = ({user, isLoggedUser, posts, isFollowing, handleFollow, handleEd
                         </div>
                     </div>
                 </div>
-                <div className="add-stories-container">
-                    {isLoggedUser ? (
-                        <div className="add-story">
-                            <GoPlus style={{fontSize:'60px', color:'rgba(209, 189, 189, 0.5)'}}/>
+                {isLoggedUser ? (
+                        <div className="add-stories-container logged-user">
+                            <div className="add-story">
+                                <GoPlus style={{fontSize:'60px', color:'rgba(209, 189, 189, 0.5)'}}/>
+                            </div>
                         </div>
                     ):(
-                        <div className="user-story">
+                        <div className="add-stories-container searched-user">
+                            <div className="user-story">
+                            </div>
                         </div>
                     )}
-                    
-                </div>
             </div>
 
             <div className="user-post-container">

@@ -9,7 +9,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid rgba(188, 188, 188, 0.666);
+    border: 1px solid var(--lines-color);
     height: 70vh;
     width: 22vw;
 }
@@ -29,12 +29,12 @@
     margin-top: 10px;
     width: 17vw;
     height: 4.5vh;
-    border: 1px solid rgba(188, 188, 188, 0.666);
+    border: 1px solid var(--lines-color);
     border-radius: 3px;
     background-color: rgba(170, 170, 170, 0.126);
 }
 .action-button{
-    background-color: rgb(0, 171, 245);
+    background-color: var(--active-buttton);
     margin-top: 20px;
     width: 17.5vw;
     height: 5vh;
@@ -44,13 +44,13 @@
     border: none;
 }
 .action-button:hover{
-    background-color: rgb(0, 143, 204);
+    background-color: var(--active-hover);
 }
 #signup-link:hover,#forgot-psswrd:hover{
-    color: rgb(0, 143, 204);
+    color: var(--active-hover);
 }
 .signup-text{
-    border: 1px solid rgba(188, 188, 188, 0.666);
+    border: 1px solid var(--lines-color);
     height: 8vh;
     width: 22vw;
     margin-top:2vh;
@@ -68,5 +68,5 @@
 }
 #forgot-psswrd, #signup-link{
     text-decoration: none;
-    color: rgb(0, 171, 245);
+    color: var(--active-buttton);
 }

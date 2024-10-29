@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
-import Navbar from "./Navbar";
-import Profile from "./Profile";
+import Navbar from "../components/Navbar";
+import Profile from "../components/Profile";
 import { useEffect, useState } from "react";
 import { fetchData } from "../utils/fetchData";
 
@@ -33,7 +33,7 @@ const ProfilePage = () => {
     }
 
     const handlePost = (post, user) => {
-        navigate(`/profile/post/${post._id}`, {state: {post: post, user: user}});
+        navigate(`/profile/post/${post._id}`, {state: {post: post, user: user, loggedUser: loggedUser}});
     }
 
     const handleFollow = async(e) => {

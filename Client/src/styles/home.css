@@ -12,7 +12,7 @@
 .image-container{
     height: 585px;
     width: 468px;
-    border: 0.5px solid rgba(101, 101, 101, 0.259);
+    border: 0.5px solid var(--lines-color);
     display: flex;
     justify-content: center;
     overflow: hidden;
@@ -30,7 +30,7 @@
     /*width: 25vw;*/
     margin-left: 15vw;
     margin-top: 3vh;
-    border-bottom: 0.5px solid rgba(101, 101, 101, 0.259);
+    border-bottom: 0.5px solid var(--lines-color);
 
     max-width: 100%;
     width: min(470px, 100vw);
@@ -42,9 +42,11 @@
     align-items: center;
     padding-bottom: 10px;
     padding-top: 5px;
+
+    display: flex;
 }
 .user-info p{
-    margin-right: 10px
+    margin-right: 10px;
 }
 .user-info img{
     margin-right:12px;
@@ -54,7 +56,7 @@
     border-radius: 50%;
 
     object-fit: contain;
-    border: 0.5px solid rgb(104, 104, 104);
+    border: 0.5px solid var(--lines-color);
 }
 .description-container{
     height: 182px;
@@ -82,7 +84,7 @@
     margin-right:10px ;
 }
 .icon.isLiked{
-    background-color: white;
+    background-color: var(--text-color);
 }
 .likes{
     display: flex;
@@ -99,9 +101,13 @@
     margin: 0;
     border-top: 0;
     width: 70%;
+    outline: none;
 }
 .action-button.post-button{
     margin-top: 0;
     width: 50px;
     height: 25px;
 }
+*input:focus {
+    outline: none;
+  }

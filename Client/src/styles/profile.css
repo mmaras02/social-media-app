@@ -3,21 +3,18 @@
     max-width: 100%;
 }
 .profile-content{
-    height: 100%;
-    /*width: 95%;
-    max-width: 1200px;*/
+    height: 100vh;
     width: calc(100%-16vw);
     margin-left: 16vw;
-    /*box-sizing: border-box;
-    padding: 100px;*/
 }
 .profile-content h1{
     margin: 0;
 }
 .profile-header{
-    height: 52vh;
+    height: auto;
     width: 60vw;
     margin: 3vh 10vw 0 10vw;
+    padding-bottom: 2vh;
     border-bottom: 1px solid rgba(107, 107, 107, 0.259);
 }
 .profile-info{
@@ -70,7 +67,7 @@
     border: none;
     height: 4vh;
     width: 7vw;
-    background-color: rgba(73, 73, 73, 0.463);
+    background-color: var(--default-button);
     border-radius: 10px;
     font-size: 15px;
     color: white;   
@@ -79,7 +76,7 @@
     margin: 5px;
 }
 .action:hover{
-    box-shadow: 10px 5px 20px 5px rgba(99, 99, 99, 0.259);
+    box-shadow: 10px 5px 20px 5px var(--hover-color);
     cursor:pointer;
     transform: scale(1);
 }
@@ -139,7 +136,7 @@
 /*display stories*/
 .add-stories-container{
     width: 100%;
-    height: 50%;
+    height: 26vh;
     display: flex;
     align-items: center;
 
@@ -148,17 +145,20 @@
     height: 87px;
     width: 87px;
     border-radius: 50%;
-    border: 1px solid rgb(77, 77, 77);
+    border: 1px solid var(--lines-color);
     margin-left: 40px;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    background-color: rgb(27, 27, 27,0.5);
+    background-color: var(--hover-color);
 }
 
 .action.following {
-   background-color: rgb(0, 171, 245);
-    color: white;
+   background-color: var(--active-buttton);
+}
+
+.add-stories-container.searched-user{
+    height: 0;
 }

@@ -7,14 +7,15 @@ import UserInfo from "./UserInfo";
 import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import useFetch from "../hooks/useFetch";
+import CommentPost from "./CommentPost";
 
 const Post = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const token = localStorage.getItem("token");
-    const [likedPosts, setLikedPosts] = useState({});
     const {data:users} = useFetch('/api/user/users','GET', token);
 
+    const loggedUser = location.state?.loggedUser;
     const post = location.state?.post;
     const user = location.state?.user;
 
@@ -71,12 +72,12 @@ const Post = () => {
                     </div>
                     <PostActions post={post} 
                                 loggedUser={user} 
-                                token={token} 
-                                likedPosts={likedPosts} 
-                                setLikedPosts={setLikedPosts}
+                                token={token}
                                 />
                     <div className="liked">{post?.likes > 0 ? `${post.likes} likes` : ''}</div>
-                    <input className="write-comment" placeholder="Add a comment" ></input>
+                    <div className="comment-input post-section">
+                        <CommentPost loggedUser={loggedUser} token={token} post={post}/>
+                    </div>
                     
                 </div>
             </div>

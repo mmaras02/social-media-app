@@ -1,15 +1,14 @@
-import Login from './components/Login';
-import Home from './components/Home';
+import Login from './pages/Login';
+import Home from './pages/Home';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Profile from './components/Profile';
-import Messages from './components/Messages';
+import Messages from './pages/Messages';
 import Create from './components/Create';
-import Search from './components/Search';
+import Search from './pages/Search';
 import Explore from './components/Explore';
-import Registration from './components/Registration';
+import Registration from './pages/Registration';
 import EditProfile from './components/EditProfile';
 import Post from './components/Post';
-import ProfilePage from './components/ProfilePage';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
   return (

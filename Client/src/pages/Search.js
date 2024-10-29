@@ -1,11 +1,11 @@
-import NavbarShort from "./NavbarShort";
 import "../styles/search.css";
 import useFetch from "../hooks/useFetch";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import UserInfo from "./UserInfo";
+import UserInfo from "../components/UserInfo";
+import UserList from "../components/UserList";
 
-const Search = () => {
+const Search = ({isActive}) => {
     const token = localStorage.getItem("token");
     const {data:users} = useFetch('/api/user/all','GET', token);
     const {data:loggedUser} = useFetch('/api/user/profile','GET', token);
@@ -24,8 +24,7 @@ const Search = () => {
 
     return ( 
         <div className="search-container">
-            <NavbarShort />
-            <div className="search-content">
+            <div className={`search-content ${isActive ? 'active' : ''}`}>
                 <div className="search-title">
                     <h2>Search</h2>
                 </div>
@@ -34,18 +33,7 @@ const Search = () => {
                         <input type="text" placeholder="Search" value={searchUser} onChange={(e) => setSearchUser(e.target.value)}/>
                     </div>
                    
-                    <div className="display-users-container">
-                        <h4>Recent</h4>
-                        {foundUsers && foundUsers.length > 0 ? (
-                            foundUsers.map((user) => 
-                                <div key={user._id} id="info-user" className="info-contents" onClick={() => handleSearch(user)}>
-                                    <UserInfo user={user} />
-                        </div>)
-                        ):(
-                            <p>No users found!</p>
-                        )
-                    }
-                    </div>
+                    <UserList foundUsers={foundUsers} handleUser={handleSearch} />
                     
                 </div>
             </div>
