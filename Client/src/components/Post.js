@@ -13,7 +13,7 @@ const Post = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const token = localStorage.getItem("token");
-    const {data:users} = useFetch('/api/user/users','GET', token);
+    const {data:users} = useFetch('/api/user/users', token);
 
     const loggedUser = location.state?.loggedUser;
     const post = location.state?.post;
@@ -76,7 +76,7 @@ const Post = () => {
                                 />
                     <div className="liked">{post?.likes > 0 ? `${post.likes} likes` : ''}</div>
                     <div className="comment-input post-section">
-                        <CommentPost loggedUser={loggedUser} token={token} post={post}/>
+                        <CommentPost loggedUser={loggedUser} token={token} post={post} />
                     </div>
                     
                 </div>

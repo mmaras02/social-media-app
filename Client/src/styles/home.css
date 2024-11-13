@@ -46,7 +46,7 @@
     display: flex;
 }
 .user-info p{
-    margin-right: 10px;
+    margin: 0 10px 0 0 ;
 }
 .user-info img{
     margin-right:12px;
@@ -55,7 +55,8 @@
     height: 42px;
     border-radius: 50%;
 
-    object-fit: contain;
+    /*object-fit: contain: ;;*/
+    object-fit: cover;
     border: 0.5px solid var(--lines-color);
 }
 .description-container{

@@ -29,8 +29,6 @@ const Login = () => {
             console.error('An error occurred during login:', error);
         }
     }
-    //fetch function from the server and the server from the database
-    //if the password is incorect you have 3 tries and then you have to wait for 20sec
     
     return ( 
         <div className="login-container">

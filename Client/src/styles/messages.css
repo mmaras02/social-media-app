@@ -1,10 +1,15 @@
 .messages-container{
     height: 100vh;
+    overflow: hidden;
 }
 .messages-content{
     margin-left: 5vw;
     width: calc(100% - 5vw);
     display: flex;
+
+    overflow: hidden;
+
+    overflow-y: auto;
 }
 .write-messages-content{
     height: 100vh;
@@ -13,8 +18,9 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    
 }
-.write-messages-content img{
+#text-icon{
     width: 8vw;
 }
 .write-messages-content p{
@@ -61,4 +67,35 @@
     width: 35vw;
     height: 100vh;
     border-right: 0.5px solid rgba(101, 101, 101, 0.259);
+}
+
+.write-messages{
+    width: 90%;
+    height: 100%;
+    padding-top: 37px;
+}
+.messages{
+    width: 100%;
+    height: 85%;
+    border-top: 0.5px solid rgba(101, 101, 101, 0.259);
+}
+.send-message{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.chat-room{
+    height: 78vh;
+    border-top: 0.5px solid rgba(101, 101, 101, 0.259);
+    overflow-y: auto;
+}
+
+.send-message textarea{
+    width: 100%;
+    height: 5vh;
+    border-radius: 25px;
+    border: 1px solid rgba(101, 101, 101, 0.259);
+    background-color: var(--background-color);
+    color: var(--text-color);
 }

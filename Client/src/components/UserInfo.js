@@ -2,11 +2,17 @@ import React from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 
-const UserInfo = ({ user, showDots, onDotsClick, description }) => {
+const UserInfo = ({ user, showDots, onDotsClick, description, disableNavigation}) => {//disable-->makni navigaciju
     const navigate = useNavigate();
 
+    const handleNavigation = () => {
+        if(!disableNavigation){
+            navigate(`/profiles/${user.username}`);
+        }
+    }
+
     return ( 
-        <div className="user-info" onClick={() => navigate(`/profiles/${user.username}`)}>
+        <div className="user-info" onClick={handleNavigation}>
             <img 
                 src={user.profilePicture ? user.profilePicture : '/images/profile.png'} 
                 alt="profile" 

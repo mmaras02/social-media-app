@@ -7,19 +7,15 @@ import UserList from "../components/UserList";
 
 const Search = ({isActive}) => {
     const token = localStorage.getItem("token");
-    const {data:users} = useFetch('/api/user/all','GET', token);
-    const {data:loggedUser} = useFetch('/api/user/profile','GET', token);
+    const {data:users} = useFetch('/api/user/all', token);
+    const {data:loggedUser} = useFetch('/api/user/profile', token);
     const [searchUser, setSearchUser] = useState("");
     const navigate = useNavigate();
 
     const foundUsers = searchUser && users?.filter((user) => user.username.toLowerCase().includes(searchUser.toLowerCase()));
 
     const handleSearch = (user) => {
-        if(loggedUser && loggedUser.username === user.username){
-            navigate('/profile');
-        } else {
-            navigate(`/profiles/${user.username}`);
-        }
+        console.log("Search function triggered");
     }
 
     return ( 
@@ -33,7 +29,7 @@ const Search = ({isActive}) => {
                         <input type="text" placeholder="Search" value={searchUser} onChange={(e) => setSearchUser(e.target.value)}/>
                     </div>
                    
-                    <UserList foundUsers={foundUsers} handleUser={handleSearch} />
+                    <UserList foundUsers={foundUsers} handleUser={handleSearch} disableNavigation={false}/>
                     
                 </div>
             </div>

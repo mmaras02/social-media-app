@@ -7,7 +7,7 @@ import { fetchData } from "../utils/fetchData";
 const Create = ( {onClose}) => {
   const token = localStorage.getItem("token");
   const [file, setFile] = useState("");
-  const {data:user} = useFetch('/api/user/profile','GET', token);
+  const {data:user} = useFetch('/api/user/profile', token);
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const [showImagePreview, setShowImagePreview] = useState(false);

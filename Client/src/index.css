@@ -17,6 +17,8 @@ body,html{
     sans-serif;
   background-color: var(--bacground-color);
   color: var(--text-color);
+
+  cursor: pointer;
 }
 .content, .App{
   background-color: var(--bacground-color);

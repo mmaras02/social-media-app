@@ -1,7 +1,6 @@
 import Navbar from "./Navbar";
 import "../styles/editProfile.css";
 import "../styles/profile.css";
-import "../styles/navbar.css";
 import "../styles/create.css";
 import { useLocation } from 'react-router-dom';
 import { useState } from "react";

@@ -1,0 +1,50 @@
+.message{
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+.messageTop{
+    display: flex;
+    padding-top: 3vh;
+    align-items: center;
+}
+
+.messageImg{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 1vw;
+}
+.messageText{
+    padding: 10px;
+    border-radius: 20px;
+    background-color: var(--default-button);
+    color: var(--text-color);
+    max-width: 30vw;
+    text-align: start;
+}
+
+.messageBottom{
+    margin-top: 0;
+    text-align: start;
+}
+
+.messageBottom p{
+    font-size: 14px;
+    color: rgb(130, 130, 130);
+}
+
+.message.sender{
+    align-items: flex-end;
+    margin-right: 4vw;
+}
+
+.message.sender .messageText{
+    background-color: rgb(63, 63, 247);
+    color: var(--text-color);
+}
+
+.message.sender .messageImg{
+    display: none;
+}

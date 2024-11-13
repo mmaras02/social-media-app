@@ -13,9 +13,9 @@ const ProfilePage = () => {
     const [selectedUser, setSelectedUser] = useState(null);
     const [isFollowing, setIsFollowing] = useState(false);
     
-    const { data: loggedUser} = useFetch('/api/user/profile','GET', token);
-    const { data: posts} = useFetch('/api/posts','GET', token);
-    const { data: allUsers} = useFetch('/api/user/all','GET', token);
+    const { data: loggedUser} = useFetch('/api/user/profile', token);
+    const { data: posts} = useFetch('/api/posts', token);
+    const { data: allUsers} = useFetch('/api/user/all', token);
 
    useEffect(() => {
         if (username && allUsers) {

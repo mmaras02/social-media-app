@@ -2,7 +2,7 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Messages from './pages/Messages';
-import Create from './components/Create';
+import Create from './pages/Create';
 import Search from './pages/Search';
 import Explore from './components/Explore';
 import Registration from './pages/Registration';

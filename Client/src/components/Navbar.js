@@ -6,7 +6,7 @@ import { LuPlusSquare } from "react-icons/lu";
 import { CgProfile } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 import { IoReorderThree } from "react-icons/io5";
-import Create from "./Create";
+import Create from "../pages/Create";
 import { useState } from "react";
 import Search from "../pages/Search";
 
@@ -66,7 +66,6 @@ const Navbar = ({isShort}) => {
                 <span><MdExplore /></span>
                 <a>Explore</a>
             </div>
-
 
             {/*just to try sliding pane for search */}
             <SlidingPane

@@ -8,9 +8,9 @@ import CommentPost from "../components/CommentPost";
 
 const Home = () => {
     const token = localStorage.getItem("token");
-    const {data:loggedUser} = useFetch('/api/user/profile','GET', token);
-    const {data:users} = useFetch('/api/user/users','GET', token);
-    const {data:posts} = useFetch('/api/posts','GET', token);
+    const {data:loggedUser} = useFetch('/api/user/profile', token);
+    const {data:users} = useFetch('/api/user/users', token);
+    const {data:posts} = useFetch('/api/posts', token);
 
     const findUserById = (userId) => {
         const user = users.find(user => user._id===userId);
