@@ -10,20 +10,10 @@ const postRoutes = require('./routes/postRoutes');
 const userAuthRoutes = require('./routes/userAuthRoutes');
 const messageRoutes = require('./routes/messageRoutes');
 const conversationRoutes = require('./routes/conversationRoutes');
-const cors = require('cors');
 
 //express app
 const app = express();
 
-//vercel proba
-app.use(cors(
-  {
-    origin:["https://social-media-app-nu-dun.vercel.app/"],
-    methods:["POST", "GET", "PATCH", "DELETE"],
-    credentials:true
-
-  }
-));
 
 //middleware
 app.use(express.json()); //request has data
