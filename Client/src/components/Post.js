@@ -2,12 +2,11 @@ import { useNavigate, useParams, useLocation } from "react-router-dom";
 import "../styles/post.css";
 import "../styles/home.css";
 import { fetchData } from "../utils/fetchData";
-import PostActions from "./PostActions";
 import UserInfo from "./UserInfo";
-import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import useFetch from "../hooks/useFetch";
 import CommentPost from "./CommentPost";
+import PostActions from "./actions/PostActions";
 
 const Post = () => {
     const navigate = useNavigate();

@@ -1,15 +1,11 @@
 import { fetchData } from "../utils/fetchData";
 import { useState } from "react";
 import "../styles/home.css";
+import InputAction from "./actions/InputAction";
 
 const CommentPost = ({loggedUser, token, post}) => {
     const [comment, setComment] = useState("");
-    const [showPostButton, setShowPostButton] = useState(false);
 
-    const handleComment = (e) => {
-        setComment(e.target.value);
-        setShowPostButton(e.target.value.length > 0); 
-    }
     const submitComment = async(post) => {
         const newComment = {
             text: comment,
@@ -26,16 +22,16 @@ const CommentPost = ({loggedUser, token, post}) => {
         }
 
         setComment("");
-        setShowPostButton(false);
     }
 
     return ( 
-        <>
-        <input className="write-comment home-page" placeholder="Write a comment" type="text" value={comment} onChange={handleComment} />
-            {showPostButton && (
-                <button className="action-button post-button" onClick={() => submitComment(post)}>post</button>
-            )}
-        </>
+        <InputAction className={"write-comment home-page"} 
+                    text={comment}
+                    onTextChange={setComment}
+                    handleText={() => submitComment(post)}
+                    placeholder={"Write a comment..."}
+                    buttonLabel={"post"}/>
+      
      );
 }
  

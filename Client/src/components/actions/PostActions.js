@@ -1,7 +1,7 @@
 import { FaRegHeart, FaRegComment, FaHeart } from "react-icons/fa6";
 import { IoPaperPlaneOutline } from "react-icons/io5";
 import { RiBookmarkLine } from "react-icons/ri";
-import { fetchData } from "../utils/fetchData";
+import { fetchData } from "../../utils/fetchData";
 import { useState } from "react";
 
 const PostActions = ({post, loggedUser, token}) => {

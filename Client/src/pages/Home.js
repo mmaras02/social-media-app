@@ -2,9 +2,9 @@ import "../styles/navbar.css";
 import "../styles/home.css";
 import Navbar from "../components/Navbar";
 import useFetch from "../hooks/useFetch";
-import PostActions from "../components/PostActions";
 import UserInfo from "../components/UserInfo";
 import CommentPost from "../components/CommentPost";
+import PostActions from "../components/actions/PostActions";
 
 const Home = () => {
     const token = localStorage.getItem("token");
