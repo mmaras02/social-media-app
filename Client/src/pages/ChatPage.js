@@ -11,23 +11,46 @@ import { useAuth } from "../context/authContext";
 
 const ChatPage = () => {
     const token = localStorage.getItem("token");
-    const {users} = useFeed();
-    const {user: loggedUser} = useAuth();
-    const [selectedUser, setSelectedUser] = useState("");
+    const { users } = useFeed();
+    const { user: loggedUser } = useAuth();
+    const [selectedUser, setSelectedUser] = useState(null);
     const [messageToSend, setMessageToSend] = useState("");
-    const [currentChat, setCurrentChat] = useState("");
-    const {data:conversations} = useFetch(loggedUser ? `/api/messages/${loggedUser._id}`: null, token);
-    const [chatMessage, setChatMessages] = useState([]);
+    const [currentChat, setCurrentChat] = useState(null);
+    const [chatMessages, setChatMessages] = useState([]);
+    const [conversations, setConversations] = useState([]);
+
 
     useEffect(() => {
-        if(loggedUser && selectedUser && conversations){
-            const selectedChat = conversations.find(convo => convo.participants.includes(selectedUser._id));
+        if (loggedUser) {
+            const fetchConversations = async () => {
+                const { data } = await fetchData(`/api/messages/${loggedUser._id}`, "GET", token);
+                setConversations(data || []);
+            };
+            fetchConversations();
+        }
+    }, [loggedUser, token]);
+
+    useEffect(() => {
+        if (currentChat) {
+            const fetchMessages = async () => {
+                const { data } = await fetchData(`/api/conversation/${currentChat._id}`, "GET", token);
+                setChatMessages(data || []);
+            };
+            fetchMessages();
+        } else {
+            setChatMessages([]);
+        }
+    }, [currentChat, token]);
+
+    useEffect(() => {
+        if (loggedUser && selectedUser) {
+            const selectedChat = conversations.find((convo) => 
+                convo.participants.includes(selectedUser._id)
+            );
             setCurrentChat(selectedChat || null);
         }
-    },[loggedUser, selectedUser, conversations])
-
-    const {data:chatMessages} = useFetch(currentChat ? `/api/conversation/${currentChat._id}`:null, 'token');
-
+    }, [loggedUser, selectedUser, conversations]);
+    
     //const foundUsers = users && loggedUser?.following?.length ? users.filter(user => loggedUser.following.includes(user._id)) : []; 
     //const foundUsers = users && conversations ? users.filter(user => conversations.some(convo => convo.receiverId === user._id)):[];
     const receiversList = conversations?.map(convo => {
@@ -52,8 +75,6 @@ const ChatPage = () => {
         if (error) {
             alert("Error sending message");
             setChatMessages(prev => prev.filter(msg => msg !== newMessage));
-        } else {
-            alert("Message sent!");
         }
         setMessageToSend("");
     }
