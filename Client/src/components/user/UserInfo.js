@@ -8,17 +8,17 @@ const UserInfo = ({ user, showDots, onDotsClick, description, disableNavigation}
 
     const handleNavigation = () => {
         if(!disableNavigation){
-            navigate(`/profiles/${user.username}`);
+            navigate(`/profiles/${user?.username}`);
         }
     }
 
     return ( 
         <div className="user-info" onClick={handleNavigation}>
             <img 
-                src={user.profilePicture ? user.profilePicture : '/images/profile.png'} 
+                src={user?.profilePicture ? user?.profilePicture : '/images/profile.png'} 
                 alt="profile" 
             />
-            <p>{user.username}</p>
+            <p>{user?.username}</p>
             {showDots && (
                 <HiDotsHorizontal 
                     style={{ marginLeft:  '180px', fontSize: '25px' }} 

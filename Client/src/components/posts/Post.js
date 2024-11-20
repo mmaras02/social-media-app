@@ -1,12 +1,12 @@
-import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./post.css";
-//import "../styles/home.css";
 import UserInfo from "../user/UserInfo";
 import { IoMdClose } from "react-icons/io";
 import CommentPost from "./CommentPost";
 import PostActions from "./PostActions";
 import { useFeed } from "../../context/feedContext";
 import { useAuth } from "../../context/authContext";
+import { useState } from "react";
 
 const Post = () => {
     const navigate = useNavigate();
@@ -17,6 +17,7 @@ const Post = () => {
 
     const post = location.state?.post;
     const user = location.state?.user;
+    const [comments, setComments] = useState(post.comments || []);
 
     const onClose = () => {
         navigate(-1);
@@ -33,7 +34,10 @@ const Post = () => {
                     <UserInfo 
                           user={user} 
                           showDots={true} 
-                          onDotsClick={() => deletePost(post._id)}
+                          onDotsClick={() => {
+                            if (loggedUser._id === post.userId) {
+                                deletePost(post._id);
+                            }}}
                       />
                     </div>
     
@@ -45,7 +49,8 @@ const Post = () => {
                           />
                           <IoMdClose onClick={onClose} style={{fontSize: '25px'}}/>
                         </div>
-                       {users && post.comments.map((comment) => {
+
+                       {users && comments.map((comment) => {
                         const commentUser = findUserById(comment.userId);
                         return (
                             <div className="display-comments-container">
@@ -61,7 +66,10 @@ const Post = () => {
                                 />
                     <div className="liked">{post?.likes > 0 ? `${post.likes} likes` : ''}</div>
                     <div className="comment-input post-section">
-                        <CommentPost loggedUser={loggedUser} token={token} post={post} />
+                        <CommentPost loggedUser={loggedUser} 
+                                     token={token}
+                                     post={post}
+                                    updateComments={setComments}/>
                     </div>
                     
                 </div>

@@ -3,8 +3,9 @@ import { useState } from "react";
 import InputAction from "./InputAction";
 import { fetchData } from "../../utils/fetchData";
 
-const CommentPost = ({loggedUser, token, post}) => {
+const CommentPost = ({loggedUser, token, post, updateComments}) => {
     const [comment, setComment] = useState("");
+    //const [comments, setComments] = useState(post.comments || []);
 
     const submitComment = async(post) => {
         const newComment = {
@@ -17,8 +18,9 @@ const CommentPost = ({loggedUser, token, post}) => {
             console.error("Error saving comment:", error);
             alert("Error saving comment");
         } else {
-            console.log("Comment successfully saved:", data);
+            console.log("Comment successfully saved:", data.comments);
             alert("Comment added!");
+            updateComments(data.comments);
         }
 
         setComment("");
