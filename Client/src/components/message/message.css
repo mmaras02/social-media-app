@@ -23,6 +23,7 @@
     color: var(--text-color);
     max-width: 30vw;
     text-align: start;
+    margin-bottom: 5px;
 }
 
 .messageBottom{

@@ -1,9 +1,11 @@
 import { useNavigate, useParams } from "react-router-dom";
-import useFetch from "../hooks/useFetch";
-import Navbar from "../components/Navbar";
-import Profile from "../components/Profile";
 import { useEffect, useState } from "react";
-import { fetchData } from "../utils/fetchData";
+import Navbar from "../../components/shared/Navbar";
+import Profile from "../../components/user/Profile";
+import { fetchData } from "../../utils/fetchData";
+import "./profile.css";
+import { useFeed } from "../../context/feedContext";
+import { useAuth } from "../../context/authContext";
 
 const ProfilePage = () => {
     const navigate = useNavigate();
@@ -12,11 +14,9 @@ const ProfilePage = () => {
     const [user, setUser] = useState(null);
     const [selectedUser, setSelectedUser] = useState(null);
     const [isFollowing, setIsFollowing] = useState(false);
+    const {posts, users: allUsers} = useFeed();
+    const {user: loggedUser} = useAuth();
     
-    const { data: loggedUser} = useFetch('/api/user/profile', token);
-    const { data: posts} = useFetch('/api/posts', token);
-    const { data: allUsers} = useFetch('/api/user/all', token);
-
    useEffect(() => {
         if (username && allUsers) {
             const foundUser = allUsers.find(user => user.username.toLowerCase() === username.toLowerCase());

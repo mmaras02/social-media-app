@@ -1,32 +1,39 @@
-import Navbar from "../components/Navbar";
+import Navbar from "../components/shared/Navbar";
 import "../styles/messages.css";
-import "../styles/editProfile.css";
+//import "../styles/editProfile.css";
 import useFetch from "../hooks/useFetch";
-import UserList from "../components/UserList";
 import { useEffect, useState } from "react";
 import { fetchData } from "../utils/fetchData";
-import ChatRoom from "../components/ChatRoom";
+import UserList from "../components/user/UserList";
+import ChatRoom from "../components/message/ChatRoom";
+import { useFeed } from "../context/feedContext";
+import { useAuth } from "../context/authContext";
 
-const Messages = () => {
+const ChatPage = () => {
     const token = localStorage.getItem("token");
-    const {data:users} = useFetch('/api/user/all', token);
-    const {data:loggedUser} = useFetch('/api/user/profile', token);
+    const {users} = useFeed();
+    const {user: loggedUser} = useAuth();
     const [selectedUser, setSelectedUser] = useState("");
     const [messageToSend, setMessageToSend] = useState("");
     const [currentChat, setCurrentChat] = useState("");
     const {data:conversations} = useFetch(loggedUser ? `/api/messages/${loggedUser._id}`: null, token);
+    const [chatMessage, setChatMessages] = useState([]);
 
     useEffect(() => {
         if(loggedUser && selectedUser && conversations){
             const selectedChat = conversations.find(convo => convo.participants.includes(selectedUser._id));
             setCurrentChat(selectedChat || null);
         }
-
     },[loggedUser, selectedUser, conversations])
 
     const {data:chatMessages} = useFetch(currentChat ? `/api/conversation/${currentChat._id}`:null, 'token');
 
-    const foundUsers = users && loggedUser?.following?.length ? users.filter(user => loggedUser.following.includes(user._id)) : []; 
+    //const foundUsers = users && loggedUser?.following?.length ? users.filter(user => loggedUser.following.includes(user._id)) : []; 
+    //const foundUsers = users && conversations ? users.filter(user => conversations.some(convo => convo.receiverId === user._id)):[];
+    const receiversList = conversations?.map(convo => {
+        return convo.participants.find(id => id !== loggedUser._id);
+    }) 
+    const foundUsers = users?.filter(user => receiversList?.includes(user._id)) || [];
 
     const handleMessage = (e, user) => {
         e.preventDefault();
@@ -39,10 +46,12 @@ const Messages = () => {
             receiverId:selectedUser._id,
             message:messageToSend
         };
+        setChatMessages(prev => [...prev, newMessage]);
 
-        const {data, error} = await fetchData('/api/messages/send', 'POST', token, newMessage);
+        const {error} = await fetchData('/api/messages/send', 'POST', token, newMessage);
         if (error) {
             alert("Error sending message");
+            setChatMessages(prev => prev.filter(msg => msg !== newMessage));
         } else {
             alert("Message sent!");
         }
@@ -84,4 +93,4 @@ const Messages = () => {
       );
 }
  
-export default Messages;
+export default ChatPage;

@@ -1,10 +1,8 @@
-import Navbar from "./Navbar";
-import "../styles/editProfile.css";
-import "../styles/profile.css";
-import "../styles/create.css";
+import Navbar from "../../components/shared/Navbar";
+import "./editProfile.css";
 import { useLocation } from 'react-router-dom';
 import { useState } from "react";
-import { fetchData } from "../utils/fetchData";
+import { fetchData } from "../../utils/fetchData";
 
 const EditProfile = () => {
     const location = useLocation();

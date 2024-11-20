@@ -10,9 +10,11 @@ const postRoutes = require('./routes/postRoutes');
 const userAuthRoutes = require('./routes/userAuthRoutes');
 const messageRoutes = require('./routes/messageRoutes');
 const conversationRoutes = require('./routes/conversationRoutes');
+const cors = require('cors');
 
 //express app
 const app = express();
+app.use(cors());
 
 
 //middleware

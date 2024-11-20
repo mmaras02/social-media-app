@@ -1,6 +1,6 @@
-import UserInfo from "../components/UserInfo";
-import "../styles/messages.css";
-import "../styles/search.css";
+//import "../styles/messages.css";
+//import "../styles/search.css";
+import UserInfo from "./UserInfo";
 
 const UserList = ({foundUsers, handleUser, disableNavigation}) => {
     return (

@@ -35,30 +35,7 @@
     max-width: 100%;
     width: min(470px, 100vw);
 }
-.user-info{
-    width: 100%;
-    display: flex;
-    height: 6vh;
-    align-items: center;
-    padding-bottom: 10px;
-    padding-top: 5px;
 
-    display: flex;
-}
-.user-info p{
-    margin: 0 10px 0 0 ;
-}
-.user-info img{
-    margin-right:12px;
-    margin-left: 5px;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-
-    /*object-fit: contain: ;;*/
-    object-fit: cover;
-    border: 0.5px solid var(--lines-color);
-}
 .description-container{
     height: 182px;
 }

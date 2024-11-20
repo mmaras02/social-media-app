@@ -2,7 +2,7 @@ export const fetchData = async(url, method, token, body, isFormData) => {
     try {
         const response = await fetch(url, {
             method:method,
-            body: isFormData ? body : JSON.stringify(body),
+            body: method != 'GET' ? (isFormData ? body : JSON.stringify(body)) : undefined,
             headers: {
                 'Authorization': `Bearer ${token}`,
                 ...(isFormData ? {} : {'Content-Type': 'application/json'}),

@@ -1,6 +1,7 @@
 import React from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
+import "./user.css"
 
 const UserInfo = ({ user, showDots, onDotsClick, description, disableNavigation}) => {//disable-->makni navigaciju
     const navigate = useNavigate();

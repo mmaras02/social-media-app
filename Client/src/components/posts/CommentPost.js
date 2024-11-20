@@ -1,7 +1,7 @@
-import { fetchData } from "../utils/fetchData";
 import { useState } from "react";
-import "../styles/home.css";
-import InputAction from "./actions/InputAction";
+//bia home
+import InputAction from "./InputAction";
+import { fetchData } from "../../utils/fetchData";
 
 const CommentPost = ({loggedUser, token, post}) => {
     const [comment, setComment] = useState("");

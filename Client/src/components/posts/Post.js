@@ -1,39 +1,25 @@
 import { useNavigate, useParams, useLocation } from "react-router-dom";
-import "../styles/post.css";
-import "../styles/home.css";
-import { fetchData } from "../utils/fetchData";
-import UserInfo from "./UserInfo";
+import "./post.css";
+//import "../styles/home.css";
+import UserInfo from "../user/UserInfo";
 import { IoMdClose } from "react-icons/io";
-import useFetch from "../hooks/useFetch";
 import CommentPost from "./CommentPost";
-import PostActions from "./actions/PostActions";
+import PostActions from "./PostActions";
+import { useFeed } from "../../context/feedContext";
+import { useAuth } from "../../context/authContext";
 
 const Post = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const token = localStorage.getItem("token");
-    const {data:users} = useFetch('/api/user/users', token);
+    const {user: loggedUser} = useAuth();
+    const { users, deletePost, findUserById } = useFeed();
 
-    const loggedUser = location.state?.loggedUser;
     const post = location.state?.post;
     const user = location.state?.user;
 
     const onClose = () => {
         navigate(-1);
-    }
-
-    const handleDelete = async(postId) => {
-      const {data, error} = await fetchData(`/api/posts/${postId}`, 'DELETE', token);
-        if(error){
-            alert("Error updating follows status", error);
-        }
-        else{
-          alert("post deleted");
-        }
-    }
-    const findUserById = (userId) => {
-        const user = users.find(user => user._id===userId);
-        return user;
     }
 
     return ( 
@@ -47,7 +33,7 @@ const Post = () => {
                     <UserInfo 
                           user={user} 
                           showDots={true} 
-                          onDotsClick={() => handleDelete(post._id)}
+                          onDotsClick={() => deletePost(post._id)}
                       />
                     </div>
     
@@ -59,7 +45,7 @@ const Post = () => {
                           />
                           <IoMdClose onClick={onClose} style={{fontSize: '25px'}}/>
                         </div>
-                       {users && post.comments.map((comment, index) => {
+                       {users && post.comments.map((comment) => {
                         const commentUser = findUserById(comment.userId);
                         return (
                             <div className="display-comments-container">

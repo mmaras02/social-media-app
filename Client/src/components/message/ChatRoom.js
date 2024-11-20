@@ -1,6 +1,6 @@
-import Message from "../components/message/Message";
-import InputAction from "./actions/InputAction";
-import UserInfo from "../components/UserInfo";
+import InputAction from "../posts/InputAction";
+import UserInfo from "../user/UserInfo";
+import Message from "./Message";
 
 const ChatRoom = ({selectedUser,loggedUser, chatMessages, messageToSend, setMessageToSend, sendMessage}) => {
     return ( 

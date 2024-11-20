@@ -1,16 +1,17 @@
 import { useState } from "react";
 import "../styles/create.css";
 import { IoMdClose } from "react-icons/io";
-import useFetch from "../hooks/useFetch";
-import { fetchData } from "../utils/fetchData";
+import { useAuth } from "../context/authContext";
+import { useFeed } from "../context/feedContext";
 
 const Create = ( {onClose}) => {
-  const token = localStorage.getItem("token");
   const [file, setFile] = useState("");
-  const {data:user} = useFetch('/api/user/profile', token);
+  const {user} = useAuth();
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const [showImagePreview, setShowImagePreview] = useState(false);
+
+  const {createPost} = useFeed();
 
   const handleImagePreview = (e) => {
     const file = e.target.files[0];
@@ -29,25 +30,18 @@ const Create = ( {onClose}) => {
       return;
     }
 
-    const formData = new FormData();
-    formData.append("userId", user._id);
-    formData.append("description", description);
-    formData.append("image", file);
-
-    const {data, error} = await fetchData(`/api/posts/newpost`, 'POST', token, formData, true);
-      if(error){
-          alert("Error updating create status", error);
-      }
-      else{
-        alert("new post created");
-      }
+    const newPostData = {
+      userId: user._id,
+      description,
+      file,
+    };
+    await createPost(newPostData);
   }
 
     return (
         <div className="create-modal">
           <div className={`create-content ${showImagePreview ? "expanded" : ""}`}>
             <div className="title-content">
-                {/*<button className="close-button">X</button>*/}
                 <h3>Create new post</h3>
                 <IoMdClose onClick={onClose} />
             </div>

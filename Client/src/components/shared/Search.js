@@ -1,16 +1,11 @@
-import "../styles/search.css";
-import useFetch from "../hooks/useFetch";
+import "./search.css";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import UserInfo from "../components/UserInfo";
-import UserList from "../components/UserList";
+import UserList from "../user/UserList";
+import { useFeed } from "../../context/feedContext";
 
 const Search = ({isActive}) => {
-    const token = localStorage.getItem("token");
-    const {data:users} = useFetch('/api/user/all', token);
-    const {data:loggedUser} = useFetch('/api/user/profile', token);
+    const {users} = useFeed();
     const [searchUser, setSearchUser] = useState("");
-    const navigate = useNavigate();
 
     const foundUsers = searchUser && users?.filter((user) => user.username.toLowerCase().includes(searchUser.toLowerCase()));
 

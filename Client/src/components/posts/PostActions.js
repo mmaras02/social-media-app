@@ -40,7 +40,7 @@ const PostActions = ({post, loggedUser, token}) => {
                     onClick= {handleLike}
                     />
                 ) : (
-                    <FaRegHeart
+                    <FaRegHeart 
                     className={`icon`}
                     id="heart-icon"
                     onClick={handleLike}

@@ -1,33 +1,17 @@
 import { useState } from "react";
-import "../styles/login.css";
-import { useNavigate } from "react-router-dom";
+import "./auth.css";
+import { useAuth } from "../../context/authContext";
 
 const Registration = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [username, setUsername] = useState('');
-    const navigate = useNavigate();
+    const { register } = useAuth(); 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        try{
-            const result = await fetch('/register', {
-                method:'POST', 
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({email,password,name,username})});
-            if(result.ok){
-                alert("Account succesfully made!");
-                navigate(-1);
-                //vrati se na login stranicu--> to u serveru napravi
-            }else{
-                console.log('failed');
-            }
-        } catch (error){
-            throw Error('Unable to register');
-        }
-        
+        register(email,password,name,username);
     }
 
     return ( 
@@ -45,5 +29,5 @@ const Registration = () => {
         </div>
      );
 }
- 
+
 export default Registration;

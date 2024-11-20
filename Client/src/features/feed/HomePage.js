@@ -1,27 +1,21 @@
-import "../styles/navbar.css";
-import "../styles/home.css";
-import Navbar from "../components/Navbar";
-import useFetch from "../hooks/useFetch";
-import UserInfo from "../components/UserInfo";
-import CommentPost from "../components/CommentPost";
-import PostActions from "../components/actions/PostActions";
+import "./home.css";
+import Navbar from "../../components/shared/Navbar";
+import UserInfo from "../../components/user/UserInfo";
+import PostActions from "../../components/posts/PostActions";
+import { useAuth } from "../../context/authContext";
+import { useFeed } from "../../context/feedContext";
+import CommentPost from "../../components/posts/CommentPost";
 
 const Home = () => {
     const token = localStorage.getItem("token");
-    const {data:loggedUser} = useFetch('/api/user/profile', token);
-    const {data:users} = useFetch('/api/user/users', token);
-    const {data:posts} = useFetch('/api/posts', token);
-
-    const findUserById = (userId) => {
-        const user = users.find(user => user._id===userId);
-        return user;
-    }
+    const {user: loggedUser} = useAuth();
+    const {posts, users, findUserById} = useFeed();
 
     return ( 
     <div className="home">
         <Navbar />
         <div className="home-content">
-            {posts &&  users && posts.map((post) => {
+            {posts && users && posts.map((post) => {
                 const user = findUserById(post.userId);
                 
                 return (

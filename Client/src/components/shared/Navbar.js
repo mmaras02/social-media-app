@@ -1,4 +1,4 @@
-import "../styles/navbar.css";
+import "./navbar.css";
 import { FaSearch, FaRegPaperPlane, FaRegHeart, FaInstagram } from "react-icons/fa";
 import { FaHouse } from "react-icons/fa6";
 import { MdExplore } from "react-icons/md";
@@ -6,9 +6,9 @@ import { LuPlusSquare } from "react-icons/lu";
 import { CgProfile } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 import { IoReorderThree } from "react-icons/io5";
-import Create from "../pages/Create";
+import Create from "../../pages/CreatePage";
 import { useState } from "react";
-import Search from "../pages/Search";
+import Search from "./Search";
 
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";

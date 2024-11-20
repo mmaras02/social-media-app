@@ -31,7 +31,6 @@ const Profile = ({user, isLoggedUser, posts, isFollowing, handleFollow, handleEd
                                         </button>
                                         <button className="action">Message</button>
                                     </>
-
                                 )}
                                 
                             </div>
