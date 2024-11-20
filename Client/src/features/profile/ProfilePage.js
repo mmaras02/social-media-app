@@ -11,11 +11,12 @@ const ProfilePage = () => {
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
     const { username } = useParams();
+    const {posts, users: allUsers} = useFeed();
+    const {user: loggedUser} = useAuth();
+
     const [user, setUser] = useState(null);
     const [selectedUser, setSelectedUser] = useState(null);
     const [isFollowing, setIsFollowing] = useState(false);
-    const {posts, users: allUsers} = useFeed();
-    const {user: loggedUser} = useAuth();
     
    useEffect(() => {
         if (username && allUsers) {
@@ -29,7 +30,7 @@ const ProfilePage = () => {
     }, [username, allUsers, loggedUser]);
 
     const handleEditProfile = () => {
-        navigate('/edit', { state: {user}});
+        navigate('/edit', { state: { user }});
     }
 
     const handlePost = (post, user) => {
@@ -51,24 +52,12 @@ const ProfilePage = () => {
                 following: loggedUser.following ? [...loggedUser.following, selectedUser._id] : [selectedUser._id]
             };
 
-            const {data, error} = await fetchData(`/api/user/${selectedUser._id}`, 'PATCH', token, updateSearchedUser);
-            if(error){
-                alert("Error updating follows status", error);
-            }
-
-            const {data1, error1} = await fetchData(`/api/user/${loggedUser._id}`, 'PATCH', token, updateLoggedUser);
-            if(error1){
-                alert("Error updating following status", error);
-            } else
-
-            setSelectedUser((prevSelectedUser) => ({
-                ...prevSelectedUser,
-                followers: updateSearchedUser.followers
-            }));
+            await fetchData(`/api/user/${selectedUser._id}`, 'PATCH', token, updateSearchedUser);
+            await fetchData(`/api/user/${loggedUser._id}`, 'PATCH', token, updateLoggedUser);
     
             setUser((prevUser) => ({
                 ...prevUser,
-                following: updateLoggedUser.following
+                followers: updateSearchedUser.followers
             }));
 
         } else{
@@ -80,30 +69,17 @@ const ProfilePage = () => {
                 following: loggedUser.following.filter(followingId => followingId !== selectedUser._id )
             };
         
-            const {data, error} = await fetchData(`/api/user/${selectedUser._id}`, 'PATCH', token, updateSearchedUser);
-            if(error){
-                alert("Error updating follows status", error);
-            }
+            await fetchData(`/api/user/${selectedUser._id}`, 'PATCH', token, updateSearchedUser);
+            await fetchData(`/api/user/${loggedUser._id}`, 'PATCH', token, updateLoggedUser);
 
-            const {data1, error1} = await fetchData(`/api/user/${loggedUser._id}`, 'PATCH', token, updateLoggedUser);
-            if(error1){
-                alert("Error updating following status", error);
-            }
-
-            setSelectedUser((prevSelectedUser) => ({
-                ...prevSelectedUser,
-                followers: updateSearchedUser.followers
-            }));
-    
             setUser((prevUser) => ({
                 ...prevUser,
-                following: updateLoggedUser.following
+                followers: updateSearchedUser.followers
             }));
 
             setIsFollowing(false);
             alert("Successfully unfollowed the user!");
         }
-
     }
 
     return ( 

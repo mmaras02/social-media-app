@@ -1,16 +1,17 @@
 import Navbar from "../components/shared/Navbar";
 import "../styles/messages.css";
-//import "../styles/editProfile.css";
-import useFetch from "../hooks/useFetch";
 import { useEffect, useState } from "react";
 import { fetchData } from "../utils/fetchData";
-import UserList from "../components/user/UserList";
 import ChatRoom from "../components/message/ChatRoom";
 import { useFeed } from "../context/feedContext";
 import { useAuth } from "../context/authContext";
+import Conversations from "../components/message/Conversations";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ChatPage = () => {
     const token = localStorage.getItem("token");
+    const { username } = useParams(); 
+    const navigate = useNavigate(); 
     const { users } = useFeed();
     const { user: loggedUser } = useAuth();
     const [selectedUser, setSelectedUser] = useState(null);
@@ -18,7 +19,6 @@ const ChatPage = () => {
     const [currentChat, setCurrentChat] = useState(null);
     const [chatMessages, setChatMessages] = useState([]);
     const [conversations, setConversations] = useState([]);
-
 
     useEffect(() => {
         if (loggedUser) {
@@ -43,24 +43,24 @@ const ChatPage = () => {
     }, [currentChat, token]);
 
     useEffect(() => {
-        if (loggedUser && selectedUser) {
-            const selectedChat = conversations.find((convo) => 
-                convo.participants.includes(selectedUser._id)
-            );
-            setCurrentChat(selectedChat || null);
-        }
-    }, [loggedUser, selectedUser, conversations]);
+        if (loggedUser && username) {
+            const user = users.find((user) => user.username === username);
+            setSelectedUser(user || null);
     
-    //const foundUsers = users && loggedUser?.following?.length ? users.filter(user => loggedUser.following.includes(user._id)) : []; 
-    //const foundUsers = users && conversations ? users.filter(user => conversations.some(convo => convo.receiverId === user._id)):[];
-    const receiversList = conversations?.map(convo => {
-        return convo.participants.find(id => id !== loggedUser._id);
-    }) 
-    const foundUsers = users?.filter(user => receiversList?.includes(user._id)) || [];
+            if (user) {
+                const selectedChat = conversations.find((convo) =>
+                    convo.participants.includes(user._id)
+                );
+                setCurrentChat(selectedChat || null);
+            }
+        }
+    }, [loggedUser, username, users, conversations]);
+
 
     const handleMessage = (e, user) => {
         e.preventDefault();
         setSelectedUser(user);
+        navigate(`/messages/${user.username}`);
     }
 
     const sendMessage = async(messageToSend) => {
@@ -83,12 +83,11 @@ const ChatPage = () => {
         <div className="messages-container">
             <Navbar isShort={true}/>
             <div className="messages-content">
-                <div className="all-settings-container messages">
-                    <div className="search-title">
-                        <h2>Message</h2>
-                    </div>
-                    <UserList foundUsers={foundUsers} handleUser={handleMessage} disableNavigation={true}/>
-                </div>
+                <Conversations conversations={conversations} 
+                               users={users}
+                               loggedUser={loggedUser} 
+                               handleMessage={handleMessage} />
+                               
                 <div className="write-messages-content">
                     {selectedUser ? (
                         <ChatRoom selectedUser={selectedUser}

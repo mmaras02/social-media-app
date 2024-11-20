@@ -1,6 +1,6 @@
 import Login from './pages/LoginPage';
 import Home from './features/feed/HomePage';
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import ChatPage from './pages/ChatPage';
 import Create from './pages/CreatePage';
 import Search from './components/shared/Search';
@@ -18,6 +18,7 @@ function App() {
             <Route exact path="/register" element = {<Registration />}></Route>
             <Route exact path="/home" element = {<Home />}></Route>
             <Route exact path="/messages" element = {<ChatPage />}></Route>
+            <Route path="/messages/:username" element = {<ChatPage />}></Route>
             <Route exact path="/create" element = {<Create />}></Route>
             <Route exact path="/search" element = {<Search />}></Route>
             <Route exact path="/edit" element = {<EditProfile />}></Route>

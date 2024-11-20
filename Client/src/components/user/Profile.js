@@ -1,7 +1,13 @@
 import { IoSettingsOutline } from "react-icons/io5";
 import { GoPlus } from "react-icons/go";
+import { useNavigate } from "react-router-dom";
 
 const Profile = ({user, isLoggedUser, posts, isFollowing, handleFollow, handleEditProfile, handlePost}) => {
+    const navigate = useNavigate();
+
+    const handleMessage = () => {
+        navigate(`/messages/${user.username}`);
+    }
 
     return ( 
         <div className="user-profile">
@@ -29,7 +35,7 @@ const Profile = ({user, isLoggedUser, posts, isFollowing, handleFollow, handleEd
                                         >
                                             {isFollowing ? "Following" : "Follow"}
                                         </button>
-                                        <button className="action">Message</button>
+                                        <button className="action" onClick={handleMessage}>Message</button>
                                     </>
                                 )}
                                 
