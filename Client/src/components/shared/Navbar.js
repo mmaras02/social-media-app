@@ -14,12 +14,14 @@ import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
 import { useAuth } from "../../context/authContext";
 
+import { CiLogout } from "react-icons/ci";
+
 const Navbar = ({isShort}) => {
     const navigate = useNavigate();
     const [showPopUp, setShowPopUp] = useState(false);
     const [isShortNavbar, setIsShortNavbar] = useState(isShort);
     const [searchPopUp, setSearchPopUp] = useState(false);
-    const {logout} = useAuth();
+    const {logout, user:loggedUser} = useAuth();
 
     const [isPaneOpen, setIsPaneOpen] = useState(false);
 
@@ -84,12 +86,20 @@ const Navbar = ({isShort}) => {
             </div>
 
             <div className="navbar-components" onClick={() => navigate("/profile")}>
-                <span><CgProfile /></span>
+                {loggedUser?.profilePicture ? (
+                    <span id="profile-span">
+                        <img src={loggedUser.profilePicture}
+                            alt="Profile"
+                            id="profile-navbar" />
+                    </span> 
+                ) : (
+                    <span><CgProfile /></span>
+                )}
                 <a>Profile</a>
             </div>
 
-            <div className="navbar-components more-info">
-                <span><IoReorderThree style={{fontSize:'35px'}} onClick={handleLogout}/></span>
+            <div className="navbar-components more-info" onClick={handleLogout}>
+                <span><CiLogout style={{fontSize:'30px'}} /></span>
                 <a>Logout</a>
             </div>
 

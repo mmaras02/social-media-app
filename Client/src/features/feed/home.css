@@ -92,3 +92,34 @@
 *input:focus {
     outline: none;
   }
+
+
+.home-header{
+width: 50%;
+margin-left: 10vw;
+margin-top: 4vh;
+border-bottom: 1px solid var(--lines-color);
+display: flex;
+}
+
+.home-header p{
+    font-weight: 650;
+    margin-bottom: 1vh;
+    font-size: 17px;
+    margin-left: 10px;
+}
+
+
+.tab {
+    color: rgb(101, 101, 101);
+    transition: color 0.3s ease, font-weight 0.3s ease;
+}
+
+.tab.active {
+    color: var(--text-color);
+    font-weight: bold;
+}
+
+.tab:hover {
+    color: rgb(137, 137, 137);
+}

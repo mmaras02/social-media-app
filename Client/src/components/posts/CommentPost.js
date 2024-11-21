@@ -1,5 +1,4 @@
 import { useState } from "react";
-//bia home
 import InputAction from "./InputAction";
 import { fetchData } from "../../utils/fetchData";
 

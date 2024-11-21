@@ -5,17 +5,26 @@ import PostActions from "../../components/posts/PostActions";
 import { useAuth } from "../../context/authContext";
 import { useFeed } from "../../context/feedContext";
 import CommentPost from "../../components/posts/CommentPost";
+import { useState } from "react";
+import HomeHeader from "./HomeHeader";
 
 const Home = () => {
     const token = localStorage.getItem("token");
     const {user: loggedUser} = useAuth();
-    const {posts, users, findUserById} = useFeed();
+    const {posts, users, findUserById, getPostsByFollowedUsers} = useFeed();
+    const [currentView, setCurrentView] = useState("following");
+    const [isFollowingView, setIsFollowingView] = useState(true);
+
+    const filteredPosts =
+        currentView === "following" ? getPostsByFollowedUsers(loggedUser) : posts;
 
     return ( 
     <div className="home">
         <Navbar />
         <div className="home-content">
-            {posts && users && posts.map((post) => {
+            <HomeHeader currentView={currentView} setCurrentView={setCurrentView}/>
+            
+            {filteredPosts && users && filteredPosts.map((post) => {
                 const user = findUserById(post.userId);
                 
                 return (

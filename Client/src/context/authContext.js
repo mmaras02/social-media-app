@@ -32,7 +32,7 @@ export const AuthProvider = ({children}) => {
         getLoggedUser();
     }, [token]);
 
-    const login = async(email, password) => {
+    const login = async(email, password, clearPassword) => {
         setLoading(true);
         setError("");
 
@@ -45,14 +45,17 @@ export const AuthProvider = ({children}) => {
             const data = await response.json();
 
             if (response.ok) {
-                setUser({email: email, password:password})
+                setUser({email: email})
                 localStorage.setItem('token', data.token);
                 navigate("/home");
             } else {
+                alert("wrong input! Please try again");
+                clearPassword();
                 setError(data.error || "Login failed. Please try again!");
             }
 
         } catch(err){
+            clearPassword();
             setError("An error occurred, please check the connection");
         }
     }
@@ -74,8 +77,9 @@ export const AuthProvider = ({children}) => {
             }
         } catch (error){
             setError("Unable to register");
+        } finally{
+            setLoading(false);
         }
-        
     }
 
     const logout = () => {

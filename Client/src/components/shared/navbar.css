@@ -89,3 +89,17 @@
 .custom-pane{
     margin-left: 5vw;
 }
+
+#profile-navbar{
+    margin: 0;
+    height: 30px;
+    width: 30px;
+    object-fit: cover;
+    border: 1px solid var(--lines-color);
+    border-radius: 50%;
+}
+
+
+#profile-span{
+    margin-left: 10px;
+}

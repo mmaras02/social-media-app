@@ -44,7 +44,7 @@
 #edit-photo{
     width: 60px;
     height: 60px;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .info-contents img{
@@ -53,7 +53,7 @@
     border-radius: 50%;
     display: flex;
     margin: 10px 20px;
-    object-fit: contain;
+    object-fit: cover;
     background-color: black;
     /*border: 1px solid whitesmoke;*/
 }

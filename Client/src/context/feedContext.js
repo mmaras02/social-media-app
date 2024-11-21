@@ -15,6 +15,11 @@ export const FeedProvider = ({children}) => {
       return user;
     }
 
+    const getPostsByFollowedUsers = (loggedUser) => {
+      if(!loggedUser || !loggedUser.following) return [];
+      return posts.filter((post) => loggedUser.following.includes(post.userId));
+    }
+
     useEffect(() => {
         const fetchPosts = async () => {
           setLoading(true);
@@ -88,6 +93,7 @@ export const FeedProvider = ({children}) => {
             loading,
             error,
             findUserById,
+            getPostsByFollowedUsers,
             createPost,
             deletePost
           }}
