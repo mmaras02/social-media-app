@@ -5,7 +5,6 @@ import { fetchData } from "../../utils/fetchData";
 
 const CommentPost = ({loggedUser, token, post, updateComments}) => {
     const [comment, setComment] = useState("");
-    //const [comments, setComments] = useState(post.comments || []);
 
     const submitComment = async(post) => {
         const newComment = {

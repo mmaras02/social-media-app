@@ -24,6 +24,7 @@ const Post = () => {
     }
 
     return ( 
+        <div onClick={onClose}>
         <div className="modal-overlay">
             <div className="post-content">
                 <div className="full-image-container">
@@ -43,11 +44,11 @@ const Post = () => {
     
                     <div className="comment-section-container">
                         <div className="info-contents">
-                        <UserInfo 
-                              user={user} 
-                              description={post.description}
-                          />
-                          <IoMdClose onClick={onClose} style={{fontSize: '25px'}}/>
+                            <UserInfo 
+                                user={user} 
+                                description={post.description}
+                            />
+                            <IoMdClose onClick={onClose} style={{fontSize: '25px'}}/>
                         </div>
 
                        {users && comments.map((comment) => {
@@ -74,6 +75,8 @@ const Post = () => {
                     
                 </div>
             </div>
+
+        </div>
 
         </div>
      );

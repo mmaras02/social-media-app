@@ -78,13 +78,16 @@
 .write-comment.home-page{
     margin: 0;
     border-top: 0;
-    width: 70%;
+    width: 100%;
     outline: none;
 }
 .action-button.post-button{
+    position: absolute;
     margin-top: 0;
-    width: 50px;
-    height: 25px;
+    width: 60px;
+    height: 30px;
+    right: 5vw;
+    top: 20%;
 }
 *input:focus {
     outline: none;

@@ -3,10 +3,14 @@ import { IoPaperPlaneOutline } from "react-icons/io5";
 import { RiBookmarkLine } from "react-icons/ri";
 import { fetchData } from "../../utils/fetchData";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useFeed } from "../../context/feedContext";
 
 const PostActions = ({post, loggedUser, token}) => {
+    const navigate = useNavigate();
     const [likes, setLikes] = useState(post.likes.length);
-    const [isLiked, setIsLiked] = useState(post.likes.includes(loggedUser._id));
+    const [isLiked, setIsLiked] = useState(post.likes.includes(loggedUser?._id));
+    const { findUserById } = useFeed();
 
     const handleLike = async() => {
         const originalLikedState = isLiked;
@@ -17,16 +21,21 @@ const PostActions = ({post, loggedUser, token}) => {
 
         const updatePost = {
             likes: isLiked 
-            ? post.likes.filter(userId => userId !== loggedUser._id) 
-            : [...post.likes, loggedUser._id]
+            ? post.likes.filter(userId => userId !== loggedUser?._id) 
+            : [...post.likes, loggedUser?._id]
         };
 
-        const {data, error} = await fetchData(`/api/posts/${post._id}`, 'PATCH', token, updatePost);
+        const {error} = await fetchData(`/api/posts/${post._id}`, 'PATCH', token, updatePost);
         if(error){
             setIsLiked(originalLikedState);
             setLikes(likes);
             alert("Error updating like status", error);
         }
+    }
+    const handleComments = () => {
+        console.log("clicked and post",post);
+        const user = findUserById(post.userId)
+        navigate(`/profile/post/${post._id}`, {state:{post,user:user}});
     }
     
     return ( 
@@ -46,7 +55,7 @@ const PostActions = ({post, loggedUser, token}) => {
                     onClick={handleLike}
                     />
                 )}
-                    <FaRegComment />
+                    <FaRegComment onClick={handleComments}/>
                     <IoPaperPlaneOutline />
             </div>
             <div className="save-icon-container">

@@ -24,14 +24,21 @@ const Home = () => {
                     <div className="image-container">
                         <img key={post._id} src={`/uploads/${post.image}`}/>
                     </div>
+                    
                     <div className="description-container" >
-                        <PostActions post={post} loggedUser={loggedUser} token={token}/>
+                        <PostActions post={post} 
+                                     loggedUser={loggedUser}
+                                    token={token}/>
+
                         <div className="description">
                             <a><strong>{user.username}</strong></a>
                             <p>{post.description}</p>
                         </div>
+
                         <div className="comment-input home-section">
-                            <CommentPost loggedUser={loggedUser} token={token} post={post}/>
+                            <CommentPost loggedUser={loggedUser}
+                                         token={token} 
+                                         post={post}/>
                         </div>
                         
                     </div>

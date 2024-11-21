@@ -24,7 +24,7 @@ const ChatRoom = ({selectedUser,loggedUser, chatMessages, messageToSend, setMess
             </div>
 
             <div className="send-message">
-                <InputAction className={"bio input"}
+                <InputAction className={"message-input"}
                             text={messageToSend}
                             onTextChange={setMessageToSend}
                             handleText={() => sendMessage(messageToSend)}

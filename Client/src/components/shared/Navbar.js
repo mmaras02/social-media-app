@@ -12,18 +12,20 @@ import Search from "./Search";
 
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
+import { useAuth } from "../../context/authContext";
 
 const Navbar = ({isShort}) => {
     const navigate = useNavigate();
     const [showPopUp, setShowPopUp] = useState(false);
     const [isShortNavbar, setIsShortNavbar] = useState(isShort);
     const [searchPopUp, setSearchPopUp] = useState(false);
+    const {logout} = useAuth();
 
     const [isPaneOpen, setIsPaneOpen] = useState(false);
 
 
     const toggleNavbar = () => {
-        setIsShortNavbar(true); 
+        setIsShortNavbar(true);
         setIsPaneOpen(true)
     };
 
@@ -38,8 +40,7 @@ const Navbar = ({isShort}) => {
 
     const handleLogout = () => {
         alert("logout success");
-        localStorage.removeItem("token");
-        navigate("/");
+        logout();
     }
 
     return (
@@ -67,19 +68,6 @@ const Navbar = ({isShort}) => {
                 <a>Explore</a>
             </div>
 
-            {/*just to try sliding pane for search */}
-            <SlidingPane
-                isOpen={isPaneOpen}
-                from="left"
-                width="400px"
-                className="custom-pane" 
-                onRequestClose={handleClosePane}
-            >
-                <Search isActive={true} />
-            </SlidingPane>
-
-
-
             <div className="navbar-components" onClick={handleMessages}>
                 <span><FaRegPaperPlane /></span>
                 <a>Messages</a>
@@ -104,6 +92,17 @@ const Navbar = ({isShort}) => {
                 <span><IoReorderThree style={{fontSize:'35px'}} onClick={handleLogout}/></span>
                 <a>Logout</a>
             </div>
+
+             {/*just to try sliding pane for search */}
+             <SlidingPane
+                isOpen={isPaneOpen}
+                from="left"
+                width="300px"
+                className="custom-pane" 
+                onRequestClose={handleClosePane}
+            >
+                <Search isActive={true} />
+            </SlidingPane>
 
             {showPopUp && <Create onClose={() => setShowPopUp(false)} />}
             {searchPopUp && <Search isActive = {searchPopUp}/>}

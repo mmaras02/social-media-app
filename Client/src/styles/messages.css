@@ -99,3 +99,22 @@
     background-color: var(--background-color);
     color: var(--text-color);
 }
+
+.message-input{
+    width: 92%;
+    margin-right: 5vw;
+    height: 7vh;
+    border: 1px solid var(--lines-color);
+    background-color: transparent;
+    color: var(--text-color);
+    outline: none;
+    border-radius: 15px;
+}
+*input:focus {
+    outline: none;
+  }
+
+.input-action-container{
+    width: 100%;
+    position: relative;
+}
