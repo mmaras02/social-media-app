@@ -113,3 +113,7 @@
   height: 400px;
   border: 1px solid var(--lines-color);
   overflow-y: auto;*/
+
+.closing{
+    display: flex;
+}

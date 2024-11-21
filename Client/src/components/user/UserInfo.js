@@ -2,11 +2,13 @@ import React from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import "./user.css"
+import { FaTrashAlt } from "react-icons/fa";
 
-const UserInfo = ({ user, showDots, onDotsClick, description, disableNavigation}) => {//disable-->makni navigaciju
+const UserInfo = ({ user, showDeleteButton, onDeleteButton, description, disableNavigation}) => {//disable-->makni navigaciju
     const navigate = useNavigate();
 
-    const handleNavigation = () => {
+    const handleNavigation = (e) => {
+        e.stopPropagation()
         if(!disableNavigation){
             navigate(`/profiles/${user?.username}`);
         }
@@ -19,10 +21,10 @@ const UserInfo = ({ user, showDots, onDotsClick, description, disableNavigation}
                 alt="profile" 
             />
             <p>{user?.username}</p>
-            {showDots && (
-                <HiDotsHorizontal 
-                    style={{ marginLeft:  '180px', fontSize: '25px' }} 
-                    onClick={onDotsClick} 
+            {showDeleteButton && (
+                <FaTrashAlt  
+                    style={{ marginLeft:  '200px', fontSize: '18px' }} 
+                    onClick={onDeleteButton} 
                 />
             )}
             {description && <p>{description}</p>}

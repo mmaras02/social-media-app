@@ -34,9 +34,9 @@ const Post = () => {
                     <div className="info-contents">
                     <UserInfo 
                           user={user} 
-                          showDots={true} 
-                          onDotsClick={() => {
-                            if (loggedUser._id === post.userId) {
+                          showDeleteButton={post.userId === loggedUser?._id} 
+                          onDeleteButton={() => {
+                            if (loggedUser?._id === post.userId) {
                                 deletePost(post._id);
                             }}}
                       />
@@ -48,7 +48,6 @@ const Post = () => {
                                 user={user} 
                                 description={post.description}
                             />
-                            <IoMdClose onClick={onClose} style={{fontSize: '25px'}}/>
                         </div>
 
                        {users && comments.map((comment) => {

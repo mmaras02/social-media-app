@@ -13,7 +13,6 @@ const Home = () => {
     const {user: loggedUser} = useAuth();
     const {posts, users, findUserById, getPostsByFollowedUsers} = useFeed();
     const [currentView, setCurrentView] = useState("following");
-    const [isFollowingView, setIsFollowingView] = useState(true);
 
     const filteredPosts =
         currentView === "following" ? getPostsByFollowedUsers(loggedUser) : posts;
@@ -23,7 +22,7 @@ const Home = () => {
         <Navbar />
         <div className="home-content">
             <HomeHeader currentView={currentView} setCurrentView={setCurrentView}/>
-            
+
             {filteredPosts && users && filteredPosts.map((post) => {
                 const user = findUserById(post.userId);
                 
