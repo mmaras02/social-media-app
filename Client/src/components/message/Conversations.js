@@ -8,7 +8,6 @@ const receiversList = conversations?.map(convo => {
     }) 
     const foundUsers = users?.filter(user => receiversList?.includes(user._id)) || [];
 
-
     return (
         <div className="all-settings-container messages">
             <div className="search-title">

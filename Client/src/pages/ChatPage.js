@@ -59,6 +59,7 @@ const ChatPage = () => {
 
     const handleMessage = (e, user) => {
         e.preventDefault();
+        console.log("whyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
         setSelectedUser(user);
         navigate(`/messages/${user.username}`);
     }

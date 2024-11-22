@@ -8,8 +8,8 @@ const UserInfo = ({ user, showDeleteButton, onDeleteButton, description, disable
     const navigate = useNavigate();
 
     const handleNavigation = (e) => {
-        e.stopPropagation()
         if(!disableNavigation){
+            e.stopPropagation();
             navigate(`/profiles/${user?.username}`);
         }
     }

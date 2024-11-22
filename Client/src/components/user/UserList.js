@@ -3,6 +3,7 @@
 import UserInfo from "./UserInfo";
 
 const UserList = ({foundUsers, handleUser, disableNavigation}) => {
+    
     return (
         <div className="user-list">
             <div className="display-users-container">
