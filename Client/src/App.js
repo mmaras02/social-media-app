@@ -1,12 +1,12 @@
 import Login from './pages/LoginPage';
-import Home from './features/feed/HomePage';
+import Home from './pages/HomePage';
 import { Route, Routes } from "react-router-dom";
 import ChatPage from './pages/ChatPage';
 import Create from './pages/CreatePage';
 import Search from './components/shared/Search';
 import Registration from './pages/RegistrationPage';
-import ProfilePage from './features/profile/ProfilePage';
-import EditProfile from './features/profile/EditProfile';
+import ProfilePage from './pages/ProfilePage';
+import EditProfile from './components/user/EditProfile';
 import Post from './components/posts/Post';
 
 function App() {

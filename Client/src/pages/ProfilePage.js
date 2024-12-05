@@ -1,11 +1,11 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Navbar from "../../components/shared/Navbar";
-import Profile from "../../components/user/Profile";
-import { fetchData } from "../../utils/fetchData";
-import "./profile.css";
-import { useFeed } from "../../context/feedContext";
-import { useAuth } from "../../context/authContext";
+import Navbar from "../components/shared/Navbar";
+import Profile from "../components/user/Profile";
+import { fetchData } from "../utils/fetchData";
+import "../components/user/profile.css";
+import { useFeed } from "../context/feedContext";
+import { useAuth } from "../context/authContext";
 
 const ProfilePage = () => {
     const navigate = useNavigate();

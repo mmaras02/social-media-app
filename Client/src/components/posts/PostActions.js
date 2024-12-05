@@ -10,7 +10,7 @@ const PostActions = ({post, loggedUser, token}) => {
     const navigate = useNavigate();
     const [likes, setLikes] = useState(post.likes.length);
     const [isLiked, setIsLiked] = useState(post.likes.includes(loggedUser?._id));
-    const { findUserById, posts, updatePostInContext } = useFeed();
+    const { findUserById } = useFeed();
 
     useEffect(() => {
         setLikes(post.likes.length);
@@ -22,9 +22,6 @@ const PostActions = ({post, loggedUser, token}) => {
         e.stopPropagation();
         const originalLikedState = isLiked;
         const updatedLikeState = isLiked ? likes - 1 : likes + 1; 
-
-        console.log("origigi ", originalLikedState);
-        console.log("updated", updatedLikeState);
 
         setIsLiked(!isLiked);
         setLikes(updatedLikeState);
@@ -41,7 +38,6 @@ const PostActions = ({post, loggedUser, token}) => {
             setLikes(likes);
             alert("Error updating like status", error);
         }
-
     }
     const handleComments = () => {
         console.log("clicked and post",post);

@@ -1,4 +1,4 @@
-import Navbar from "../../components/shared/Navbar";
+import Navbar from "../shared/Navbar";
 import "./editProfile.css";
 import { useLocation } from 'react-router-dom';
 import { useState } from "react";

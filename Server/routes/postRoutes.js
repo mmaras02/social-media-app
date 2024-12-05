@@ -6,7 +6,6 @@ const fileUpload = require('../middleware/fileUpload');
 
 router.get('/', postController.displayAllPosts);
 
-//middleware has to apply to all routes 
 router.use(verifyToken);
 
 router.get('/:id', postController.displayPost);
@@ -18,15 +17,3 @@ router.post('/newpost',fileUpload, postController.createPost);
 
 
 module.exports = router;
-
-
-/*router.post("/add",upload.single("image"), (req, res) => {
-    const newPost = new Post({
-        userId:req.body._id,
-        description: req.body.description,
-        image:req.file.image
-    });
-    newPost.save()
-    .then(()=>res.json('new post posted'))
-    .catch((err)=> res.status(400).josn(err));
-})*/

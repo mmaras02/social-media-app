@@ -1,5 +1,4 @@
 import React from "react";
-import { HiDotsHorizontal } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import "./user.css"
 import { FaTrashAlt } from "react-icons/fa";

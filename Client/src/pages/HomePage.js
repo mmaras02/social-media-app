@@ -1,12 +1,12 @@
-import "./home.css";
-import Navbar from "../../components/shared/Navbar";
-import UserInfo from "../../components/user/UserInfo";
-import PostActions from "../../components/posts/PostActions";
-import { useAuth } from "../../context/authContext";
-import { useFeed } from "../../context/feedContext";
-import CommentPost from "../../components/posts/CommentPost";
+import "../components/feed/home.css";
+import Navbar from "../components/shared/Navbar";
+import UserInfo from "../components/user/UserInfo";
+import PostActions from "../components/posts/PostActions";
+import { useAuth } from "../context/authContext";
+import { useFeed } from "../context/feedContext";
+import CommentPost from "../components/posts/CommentPost";
 import { useState } from "react";
-import HomeHeader from "./HomeHeader";
+import HomeHeader from "../components/feed/HomeHeader";
 
 const Home = () => {
     const token = localStorage.getItem("token");

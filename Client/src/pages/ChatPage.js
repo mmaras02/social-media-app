@@ -1,5 +1,5 @@
 import Navbar from "../components/shared/Navbar";
-import "../styles/messages.css";
+import "../components/message/messages.css";
 import { useEffect, useState } from "react";
 import { fetchData } from "../utils/fetchData";
 import ChatRoom from "../components/message/ChatRoom";
@@ -59,7 +59,6 @@ const ChatPage = () => {
 
     const handleMessage = (e, user) => {
         e.preventDefault();
-        console.log("whyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
         setSelectedUser(user);
         navigate(`/messages/${user.username}`);
     }

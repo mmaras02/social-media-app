@@ -1,5 +1,5 @@
 import SearchInput from "../shared/SearchInput";
-import "../../styles/messages.css";
+import "./messages.css";
 
 const Conversations = ({conversations, users, loggedUser, handleMessage}) => {
 
