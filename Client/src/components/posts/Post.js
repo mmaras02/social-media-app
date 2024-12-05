@@ -19,8 +19,11 @@ const Post = () => {
     const user = location.state?.user;
     const [comments, setComments] = useState(post.comments || []);
 
-    const onClose = () => {
-        navigate(-1);
+    const onClose = (e) => {
+        if (!e.target.closest(".post-content")) {
+            e.preventDefault();
+            navigate(-1);
+        }
     }
 
     return ( 
